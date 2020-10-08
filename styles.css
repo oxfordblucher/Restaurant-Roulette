@@ -1,6 +1,8 @@
+.column {
+    border-left: grey solid 1px;
+}
 .tile {
     background-color: #EEEEEC;
     padding: 10px;
     margin: 10px;
-    
 }
