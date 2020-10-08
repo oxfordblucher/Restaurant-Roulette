@@ -4,17 +4,94 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Working Title</title>
+    <title>Umewe</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600&family=Ruluko&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600&family=Mate+SC&family=Ruluko&display=swap" rel="stylesheet">
   </head>
   <body>
-    <div class="box">
+
+<nav class="navbar is-light" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="https://bulma.io">
+      <img src="./revised logo.png" width="100" height="58">
+    </a>
+
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item">
+        Home
+      </a>
+
+      <a class="navbar-item">
+        About You+Me+We
+      </a>
+        </div>
+      </div>
+    </div>
+
+    
+    </div>
+  </div>
+</nav>
+
+  <div class="container is-fluid">
+    <div class="notification is-white">
+      <Img src="./top image.png">
+    </div>
+  </div>
+
+<div class="container">
+  <div class="notification is-white">
+      <div class="box">
+        <article class="media">
+          <div class="media-center">
+          </div>
+          <div class="media-content">
+            <div class="content">
+              <p>
+               Not in the same place but want to be? Well let UWEME help choosing the perfect destination between 2 seperate locations.
+               Give it a try. Simply input your location and then the location of the party you'd like to meet-up with and we'll provide
+               you with a list of the places that are located in the area in the middle of both entered locations. Give it a try!
+               </p>
+            </div>
+            <nav class="level is-mobile">
+              <div class="level-left">
+                <a class="level-item" aria-label="reply">
+                  <span class="icon is-small">
+                    <i class="fas fa-reply" aria-hidden="true"></i>
+                  </span>
+                </a>
+                <a class="level-item" aria-label="retweet">
+                  <span class="icon is-small">
+                    <i class="fas fa-retweet" aria-hidden="true"></i>
+                  </span>
+                </a>
+                <a class="level-item" aria-label="like">
+                  <span class="icon is-small">
+                    <i class="fas fa-heart" aria-hidden="true"></i>
+                  </span>
+                </a>
+              </div>
+            </nav>
+          </div>
+        </article>
+      </div>
+      <div class="box">
         <div class="columns">
             <div class="column"></div>
             <div class="column is-four-fifths">
                 <!--This is the Address 1 field-->
                 <div class="field">
-                    <label class="label">Address 1</label>
+                    <label class="label">You</label>
                     <div class="control has-icons-left has-icons-right">
                         <!--This is where the Address 1 value will be located-->
                       <input id="addressOne" class="input is-primary" type="text" placeholder="Address 1">
@@ -22,7 +99,7 @@
                   </div>
                   <!--This is the Address 1 field-->
                   <div class="field">
-                    <label class="label">Address 2</label>
+                    <label class="label">ME</label>
                     <div class="control has-icons-left has-icons-right">
                         <!--This is where the Address 1 value will be located-->
                       <input id="addressTwo" class="input is-primary" type="text" placeholder="Address 2">
@@ -30,12 +107,63 @@
                   </div>
                   <div class="control">
                       <!--This is button should submit the above data-->
-                    <button id= "submitAddresses" class="button is-primary">Submit</button>
+                    <button id= "submitAddresses" class="button is-light">Search</button>
                   </div>
             </div>
             <div class="column"></div>
           </div>
       </div>
+  </div>
+</div>
+
+<div class="container is-fluid">
+  <div class="notification is-light">
+    <div class="columns is-mobile">
+      <div class="column">
+        <img src="./image 2.png">
+      </div>
+      <div class="column">
+        <p>
+          With UMEWE Finding a meeting destination is just the start. Use UMEWE to meet-up with an old friend for coffee or
+          a new social media match for drinks. Either way with UMEWE you'll both be meeting up at a location
+          almost exactly equal in distance from both starting points. 
+        </p>
+        
+        <br>
+
+        <p>
+          Cut waiting times in half at some of the area's favorite busy places using UMEWE. Plan your trip using our site and determine ahead
+          of time the choice of meeting spot (i.e Resturant, cafe, diner...) in order to schedule reservations. 
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="columns is-mobile">
+  <div class="column">
+    <h3>Meeting For The First Time?</h3>
+     <P>
+       Did you both swipe right and now you're both ready to meet, UMEWE is a great way to make arrangments for a first encounter.
+      let us try to help you find the most comfortable enviornment to make your first impressions.
+     </P>
+  </div>
+  <div class="column">
+    <img src="./social.png">
+  </div>
+</div>
+
+<div class="columns is-mobile">
+  <div class="column">1</div>
+  <div class="column">2</div>
+</div>
+
+<div id="bottom">
+  <p>UMEWE</p>
+</div>
+
+
+   
       <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
       <script src="script.js"></script>
 
