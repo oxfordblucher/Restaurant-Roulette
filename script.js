@@ -31,8 +31,7 @@ $(".modal-button").click(function() {
     var setting1 = {
         "async": true,
         "crossDomain": true,
-        "url": "https://forward-reverse-geocoding.p.rapidapi.com/v1/forward?polygon_geojson=0&state=" + stateOne + "&limit=1&street=" + streetOne + "&polygon_svg=0&postalcode=" + codeOne + 
-        "&polygon_kml=0&namedetails=0&accept-language=en&city=" + cityOne + "&addressdetails=1&polygon_threshold=0.0&polygon_text=0&bounded=0&format=json",
+        "url": "https://forward-reverse-geocoding.p.rapidapi.com/v1/forward?polygon_geojson=0&state=" + stateOne + "&limit=1&street=" + streetOne + "&polygon_svg=0&polygon_kml=0&namedetails=0&accept-language=en&city=" + cityOne + "&addressdetails=1&polygon_threshold=0.0&polygon_text=0&bounded=0&format=json",
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "forward-reverse-geocoding.p.rapidapi.com",
@@ -43,8 +42,7 @@ $(".modal-button").click(function() {
     var setting2 = {
         "async": true,
         "crossDomain": true,
-        "url": "https://forward-reverse-geocoding.p.rapidapi.com/v1/forward?polygon_geojson=0&state=" + stateTwo + "&limit=1&street=" + streetTwo + "&polygon_svg=0&postalcode=" + codeTwo + 
-        "&polygon_kml=0&namedetails=0&accept-language=en&city=" + cityTwo + "&addressdetails=1&polygon_threshold=0.0&polygon_text=0&bounded=0&format=json",
+        "url": "https://forward-reverse-geocoding.p.rapidapi.com/v1/forward?polygon_geojson=0&state=" + stateTwo + "&limit=1&street=" + streetTwo + "&polygon_svg=0&polygon_kml=0&namedetails=0&accept-language=en&city=" + cityTwo + "&addressdetails=1&polygon_threshold=0.0&polygon_text=0&bounded=0&format=json",
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "forward-reverse-geocoding.p.rapidapi.com",
@@ -61,26 +59,30 @@ function test(setting1, setting2){
         var temp={lat:response[0].lat, lon: response[0].lon};
         return temp
     }).then(function(temp) {
-        console.log(temp);
         $.ajax(setting2)
         .then(function(response2) {
-            console.log(response2);
             //action1
-            console.log(temp)
+            console.log(temp);
             var temp2={lat:response2[0].lat, lon: response2[0].lon};
-            var lat1 = parseInt(temp.lat);
-            var lat2 = parseInt(temp2.lat);
-            var lon1 = parseInt(temp.lon);
-            var lon2 = parseInt(temp2.lon);
+            console.log(temp2);
+            var lat1 = parseFloat(temp.lat);
+            var lat2 = parseFloat(temp2.lat);
+            var lon1 = parseFloat(temp.lon);
+            var lon2 = parseFloat(temp2.lon);
             var avgLat = (lat1 + lat2) /2;
             var avgLon = (lon1 + lon2) /2;
-            console.log(avgLat, avgLon);
-        }).then(function(avgLat,avgLon) {
-            var foodUrl = "https://developers.zomato.com/api/v2.1/search?count=10&lat=" + avgLat + "&lon=" + avgLon + "&radius=3219";
+            var coord = {
+                lat: avgLat, 
+                lon: avgLon
+            };
+            return coord;
+        }).then(function(coord) {
+            console.log(coord);
+            var foodUrl = "https://developers.zomato.com/api/v2.1/search?count=10&lat=" + coord.lat + "&lon=" + coord.lon + "&radius=3219";
             $.ajax({
                 url: foodUrl,
-                data: {
-                    "user-key": "0b0b28bbc4c8c280f62ef50d44784da7"
+                headers: {
+                    'user-key': "0b0b28bbc4c8c280f62ef50d44784da7"
                 },
                 method: 'GET'
         }).then(function(response) {
