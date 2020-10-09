@@ -1,53 +1,202 @@
-
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Working Title</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-  </head>
-  <body>
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Modal title</p>
+                <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+                <!-- Content ... -->
+            </section>
+            <footer class="modal-card-foot">
+                <button class="button is-success">Save changes</button>
+                <button class="button">Cancel</button>
+            </footer>
+        </div>
+    </div>
+
+        <div class="box">
+            <div class="columns">
+                <div class="column"></div>
+                <div class="column is-four-fifths">
+                    <!--This is the Address 1 field-->
+                    <div class="field">
+                        <label class="label">Address 1</label>
+                        <!--This is where the Address 1 value will be located-->
+                        <div class="control has-icons-left has-icons-right">
+                            <input id="streetOne" class="input is-primary" type="text" placeholder="Street address">
+                        </div>
+                        <div class="control has-icons-left has-icons-right">
+                            <input id="cityOne" class="input is-primary" type="text" placeholder="City">
+                        </div>
+                        <div class="control has-icons-left has-icons-right">
+                            <input id="stateOne" class="input is-primary" type="text" placeholder="State">
+                        </div>
+                        <div class="control has-icons-left has-icons-right">
+                            <input id="codeOne" class="input is-primary" type="number" placeholder="Postal Code">
+                        </div>
+                    </div>
+                    <!--This is the Address 2 field-->
+                    <div class="field">
+                        <label class="label">Address 2</label>
+                        <!--This is where the Address 2 value will be located-->
+                        <div class="control has-icons-left has-icons-right">
+                            <input id="streetTwo" class="input is-primary" type="text" placeholder="Street address">
+                        </div>
+                        <div class="control has-icons-left has-icons-right">
+                            <input id="cityTwo" class="input is-primary" type="text" placeholder="City">
+                        </div>
+                        <div class="control has-icons-left has-icons-right">
+                            <input id="stateTwo" class="input is-primary" type="text" placeholder="State">
+                        </div>
+                        <div class="control has-icons-left has-icons-right">
+                            <input id="codeTwo" class="input is-primary" type="number" placeholder="Postal Code">
+                            <div class="control">
+                                <!--This is button should submit the above data-->
+                                <button id="submitAddresses" class="button is-primary">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div>
+                        <p id="restaurantThree" class="restaurantName" style="font-size:3vw;"></p>
+                        <div>
+                            <p class="restaurantAddress"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div>
+                        <p id="restaurantFour" class="restaurantName" style="font-size:3vw;"></p>
+                        <div>
+                            <p class="restaurantAddress"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div>
+                        <p id="restaurantFive" class="restaurantName" style="font-size:3vw;"></p>
+                        <div>
+                            <p class="restaurantAddress"></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Map -->
+        </div>
+    </div>
+
     <div class="box">
         <div class="columns">
-            <div class="column"></div>
-            <div class="column is-four-fifths">
-                <!--This is the Address 1 field-->
-                <div class="field">
-                    <label class="label">Address 1</label>
-                        <!--This is where the Address 1 value will be located-->
-                    <div class="control has-icons-left has-icons-right">
-                    <input id="streetOne" class="input is-primary" type="text" placeholder="Street address">
-                  </div>
-                  <div class="control has-icons-left has-icons-right">
-                    <input id="cityOne" class="input is-primary" type="text" placeholder="City">
-                  </div>
-                  <div class="control has-icons-left has-icons-right">
-                  <input id="stateOne" class="input is-primary" type="text" placeholder="State">
+            <!-- Filters -->
+            <div class="column is-one-quarter">
+                <div><strong>Filters</strong></div><br>
+                <!-- Distance -->
+                <div class="distance"><strong>Distance</strong></div>
+                <div class="control">
+                    <label class="radio">
+                        <input id="halfMile" type="radio" name="answer">
+                        0.5 miles
+                    </label>
+                    <div>
+                        <label class="radio">
+                            <input id="oneMile" type="radio" name="answer">
+                            1 miles
+                        </label>
+                    </div>
+                    <div>
+                        <label class="radio">
+                            <input id="twoMile" type="radio" name="answer">
+                            2 miles
+                        </label>
+                    </div>
+                    <div>
+                        <label class="radio">
+                            <input id="threeMile" type="radio" name="answer">
+                            3 miles
+                        </label>
+                    </div><br>
                 </div>
-                  <!--This is the Address 2 field-->
-                  <div class="field">
-                    <label class="label">Address 2</label>
-                      <!--This is where the Address 2 value will be located-->
-                  <div class="control has-icons-left has-icons-right">
-                  <input id="streetTwo" class="input is-primary" type="text" placeholder="Street address">
+                <!-- Price -->
+                <div class="price"><strong>Price</strong></div>
+                <div class="control">
+                    <label class="radio">
+                        <input id="range1" type="radio" name="answer">
+                        $0 - $10
+                    </label>
+                    <div>
+                        <label class="radio">
+                            <input id="range2" type="radio" name="answer">
+                            $10 - $20
+                        </label>
+                    </div>
+                    <div>
+                        <label class="radio">
+                            <input id="range3" type="radio" name="answer">
+                            $20 - $30
+                        </label>
+                    </div>
+                    <div>
+                        <label class="radio">
+                            <input id="range4" type="radio" name="answer">
+                            $30 - $40
+                        </label>
+                    </div><br>
                 </div>
-                <div class="control has-icons-left has-icons-right">
-                  <input id="cityTwo" class="input is-primary" type="text" placeholder="City">
-                </div>
-                <div class="control has-icons-left has-icons-right">
-                <input id="stateTwo" class="input is-primary" type="text" placeholder="State">
-                  <div class="control">
-                      <!--This is button should submit the above data-->
-                    <button id= "submitAddresses" class="button is-primary">Submit</button>
-                  </div>
             </div>
-            <div class="column"></div>
-          </div>
-      </div>
-      <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-      <script src="script.js"></script>
+            <!-- Restaurant list -->
+            <div class="column auto restaurant-list">
+                <div class="tile">
+                    <div>
+                        <p id="restaurantThree" class="restaurantName" style="font-size:3vw;">Restaurant</p>
+                        <div>
+                            <p class="restaurantAddress">Address</p>
+                        </div><br>
 
-  </body>
+                        <!-- Trigger/Open The Modal -->
+                        <div><button id="viewRestaurant" class="button is-danger">View</button></div>
+                    </div>
+                </div>
+
+
+                <div class="tile">
+                    <div>
+                        <p id="restaurantTwo" class="restaurantName" style="font-size:3vw;"></p>
+                        <div>
+                            <p class="restaurantAddress"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column auto">
+                <div id="myMap"></div>
+            </div>
+    </div>
+            <script src="map.js"></script>
+            <script
+                src="http://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[ApFZwBlF5C4sFUrPWvHt7DxQbosvOYl24WTQE-GGMHphkpiCCHm14tkZq0S8CvJZ]"
+                async defer></script>
+            <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+            <script src="script.js"></script>
+            
+</body>
+
 </html>
-
