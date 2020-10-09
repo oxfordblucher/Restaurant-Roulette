@@ -16,7 +16,7 @@
     <div class="modal-card">
       <header class="modal-card-head">
         <p class="modal-card-title">Modal title</p>
-        <button class="delete" aria-label="close"></button>
+        <button class="delete modal-close" aria-label="close"></button>
       </header>
       <section class="modal-card-body">
         <!-- Content ... -->
@@ -125,10 +125,27 @@
             </div><br>
           
            <!-- Trigger/Open The Modal -->
-           <div><button id="viewRestaurant" class="button is-danger">View</button></div>
-          </div>
-          </div>
-        
+            <div class = "container">
+               <p>
+                  <a class = "button is-primary modal-button" data-target = "#modal">view</a>
+               </p>
+               <div id = "modal" class = "modal">
+                  <div class = "modal-background"></div>
+                  <div class = "modal-card">
+                     <header class = "modal-card-head">
+                        <p class = "modal-card-title">Modal Card</p>
+                        <button class = "delete" aria-label = "close"></button>
+                     </header>
+                     
+                     <section class = "modal-card-body">
+                        <div class = "content">
+                           
+                        </div>
+                     </section>
+                     
+                  </div>
+               </div>
+            </div>
 
         <div class="tile">
           <div>

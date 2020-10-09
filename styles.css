@@ -1,8 +1,13 @@
-.column {
-    border-left: grey solid 1px;
-}
 .tile {
     background-color: #EEEEEC;
     padding: 10px;
     margin: 10px;
+}
+
+.border-left {
+    border-left: black 1px solid;
+}
+
+#modal-button-spacing {
+   background-color: aquamarine; 
 }
