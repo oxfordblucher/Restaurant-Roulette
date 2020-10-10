@@ -94,6 +94,19 @@
                     <div class="control has-icons-left has-icons-right">
                         <input id="codeTwo" class="input is-primary" type="number" placeholder="Postal Code">
                         <div class="control">
+                          <div class="field has-addons">
+                            <div class="control is-expanded">
+                              <label class="label">Sort By</label>
+                              <div class="select is-fullwidth">
+                                <select name="country">
+                                  <option></option>
+                                  <option id="cost">Test Cost</option>
+                                  <option id="distance">Test Distance</option>
+                                  <option id="popularity">Test Popularity</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
                             <!--This is button should submit the above data-->
                             <button id="submitAddresses" class="button is-primary">Submit</button>
                         </div>
@@ -162,7 +175,8 @@
         </div>
         <!-- Restaurant list -->
       <div class="column auto restaurant-list">
-        <div class="tile">
+        <!-- Trigger/Open The Modal --> 
+        <div class = "modal-button tile" data-target = "#modal">
           <div>
             <p id="restaurantOne" class="restaurantName" style="font-size:3vw;">Restaurant</p>
             <div>
@@ -176,13 +190,8 @@
             <span class="fa fa-star"></span>
           </div>
 
-           <!-- Trigger/Open The Modal -->   
-            <div class = "container">
-               <p>
-                  <a class = "button is-danger modal-button" data-target = "#modal">View</a>
-               </p>
-               
-            </div>
+             
+           
          
         </div>
       </div>
