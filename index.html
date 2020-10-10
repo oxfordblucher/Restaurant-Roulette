@@ -15,7 +15,7 @@
       <div class = "modal-card">
          <header class = "modal-card-head">
             <p id="modalRestaurantName" class = "modal-card-title"></p>
-            <button class = "delete" aria-label = "close"></button>
+            <button class = "delete" id="modal-close" aria-label = "close"></button>
          </header>
          <section class = "modal-card-body">
             <div class = "content"></div>
@@ -116,11 +116,11 @@
     </div>
   
     <div class="box">
-      <div class="columns">
-        <!-- Filters -->
+      <!-- <div class="columns">
+        
         <div class="column is-one-quarter">
           <div><strong>Filters</strong></div><br>
-          <!-- Distance -->
+          
           <div class="distance"><strong>Distance</strong></div>
           <div class="control">
             <label class="radio">
@@ -146,7 +146,7 @@
               </label>
             </div><br>
           </div>
-          <!-- Price -->
+          
           <div class="price"><strong>Price</strong></div>
           <div class="control">
             <label class="radio">
@@ -171,10 +171,10 @@
                 $30 - $40
               </label>
             </div><br>
-          </div>
+          </div> -->
         </div>
         <!-- Restaurant list -->
-      <div class="column auto restaurant-list">
+      <div class="column is-8 restaurant-list">
         <!-- Trigger/Open The Modal --> 
         <div class = "modal-button tile" data-target = "#modal">
           <div>
@@ -189,9 +189,6 @@
             <span class="fa fa-star"></span>
             <span class="fa fa-star"></span>
           </div>
-
-             
-           
          
         </div>
       </div>
@@ -262,7 +259,7 @@
         </div>
       </div>
         <!-- Map -->
-        <div class="column auto">
+        <div class="column is-half">
             <div id="myMap"></div>
         </div>
       </div>

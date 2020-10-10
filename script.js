@@ -5,9 +5,9 @@ $(".modal-button").click(function () {
     $("#modalRestaurantName").text($(this).parent)
 });
 
-$(".modal-close").click(function () {
+$("#modal-close").click(function () {
     $("html").removeClass("is-clipped");
-    $(this).parent().removeClass("is-active");
+    $(".modal").removeClass("is-active");
 });
 
 function GetMap() {
