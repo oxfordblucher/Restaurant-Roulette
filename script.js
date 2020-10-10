@@ -5,7 +5,7 @@ $(".modal-button").click(function () {
     $("#modalRestaurantName").text($(this).parent)
 });
 
-$(".modal-close").click(function () {
+$(".delete").click(function () {
     $("html").removeClass("is-clipped");
     $(this).parent().removeClass("is-active");
 });
@@ -79,7 +79,6 @@ function test(setting1, setting2) {
                     console.log(avgLat, avgLon);
                     //Bing requires funky formatting, so I've included it here.
                     bingLoc = new Microsoft.Maps.Location(avgLat, avgLon);
-
                     
                     var coord = {
                         lat: avgLat,
