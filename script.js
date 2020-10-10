@@ -137,7 +137,6 @@ function test(setting1, setting2) {
 
                     }
 
-
                     var coord = {
                         lat: avgLat,
                         lon: avgLon
@@ -177,5 +176,4 @@ function test(setting1, setting2) {
                 });
         })
 });
-
 }});
