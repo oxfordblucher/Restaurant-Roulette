@@ -2,7 +2,7 @@ $(".modal-button").click(function () {
     var target = $(this).data("target");
     $("html").addClass("is-clipped");
     $(target).addClass("is-active");
-    $("#modalRestaurantName").text($(this).parent.)
+    $("#modalRestaurantName").text($(this).parent)
 });
 
 $(".modal-close").click(function () {
@@ -10,8 +10,14 @@ $(".modal-close").click(function () {
     $(this).parent().removeClass("is-active");
 });
 
+function GetMap() {
+    var map = new Microsoft.Maps.Map('#myMap', {
+        credentials: 'ApFZwBlF5C4sFUrPWvHt7DxQbosvOYl24WTQE-GGMHphkpiCCHm14tkZq0S8CvJZ',
+       
+    });}
 // A $( document ).ready() block.
 $(document).ready(function () {
+
     //On click should set variables for the input fields
     $("#submitAddresses").on("click", function () {
 
@@ -131,7 +137,7 @@ function test(setting1, setting2) {
 
                     }
 
-                    
+
                     var coord = {
                         lat: avgLat,
                         lon: avgLon
@@ -171,10 +177,5 @@ function test(setting1, setting2) {
                 });
         })
 });
-//Default Map for on Load
-function GetMap() {
-    new Microsoft.Maps.Map('#myMap', {
-        credentials: 'ApFZwBlF5C4sFUrPWvHt7DxQbosvOYl24WTQE-GGMHphkpiCCHm14tkZq0S8CvJZ'
-    });
-}
+
 }});
