@@ -16,7 +16,7 @@ $(document).ready(function () {
 
 
 
-
+        
     let streetOne = $("#streetOne").val();
     let cityOne = $("#cityOne").val();
     let stateOne = $("#stateOne").val();
