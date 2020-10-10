@@ -8,6 +8,10 @@
     border-left: black 1px solid;
 }
 
-#modal-button-spacing {
-   background-color: aquamarine; 
+.checked {
+    color: orange;
+}
+
+.bold {
+    font-weight: bold;
 }
