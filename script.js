@@ -2,6 +2,7 @@ $(".modal-button").click(function () {
     var target = $(this).data("target");
     $("html").addClass("is-clipped");
     $(target).addClass("is-active");
+    $("#modalRestaurantName").text($(this).parent.)
 });
 
 $(".modal-close").click(function () {
@@ -123,15 +124,19 @@ function test(setting1, setting2) {
                         for (let i = 0; i < response.restaurants.length; i++) {
                             let restList = $(".restaurant-list");
                             let result = response.restaurants[i];
+
                             var nuTile = $("<div class ='tile'>");
                             var restName = $("<div class='restaurantName' style='font-size:3vw;'>");
                             var restAddr = $("<div class='restaurantAddress'>");
                             var restCuis = $("<div class='restaurantCuisine'>");
+                            var nuBtn = $("<a class='button is-danger modal-button' data-target='#modal'>View</a>");
+
                             restList.append(nuTile);
                             restName.text("Name: " + response.restaurants[i].restaurant.name);
                             restAddr.text("Address: " + response.restaurants[i].restaurant.location.address);
                             restCuis.text("Cuisine: " + response.restaurants[i].restaurant.cuisines);
-                            nuTile.append(restName,restAddr,restCuis);
+                            nuTile.append(restName,restAddr,restCuis,nuBtn);
+
                         }
                     });
                 });
