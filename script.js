@@ -16,11 +16,6 @@ $(document).ready(function () {
 
 
 
-        console.log("Functioning");
-        let addressOne = $("#addressOne").val();
-        let addressTwo = $("#addressTwo").val();
-        alert(addressOne + addressTwo);
-    });
 
     let streetOne = $("#streetOne").val();
     let cityOne = $("#cityOne").val();
@@ -131,7 +126,7 @@ function test(setting1, setting2) {
                 });
         })
 }
-
+});
 //Map Section
 
 function GetMap() {
@@ -160,7 +155,6 @@ function GetMap() {
 
 
 }
-
 
 
 
