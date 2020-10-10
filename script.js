@@ -66,6 +66,7 @@ function test(setting1, setting2) {
         }).then(function (temp) {
             $.ajax(setting2)
                 .then(function (response2) {
+                    console.log(response2)
                     //action1
                     console.log(temp);
                     var temp2 = { lat: response2[0].lat, lon: response2[0].lon };
@@ -79,7 +80,6 @@ function test(setting1, setting2) {
                     console.log(avgLat, avgLon);
                     //Bing requires funky formatting, so I've included it here.
                     bingLoc = new Microsoft.Maps.Location(avgLat, avgLon);
-
                     
                     var coord = {
                         lat: avgLat,
@@ -97,7 +97,22 @@ function test(setting1, setting2) {
                         method: 'GET'
                     }).then(function (response) {
                         console.log(response);
-                        console.log(response.restaurants[0].restaurant.location.latitude);
+                        console.log(response.restaurants);
+                        console.log(response.restaurants[0]);
+                        for (let i = 0; i < response.restaurants.length; i++) {
+                            let restList = $(".restaurant-list");
+                            let result = response.restaurants[i];
+
+                            var nuTile = $("<div class ='tile modal-button' data-target='#modal'>");
+                            var restName = $("<div class='restaurantName' style='font-size:3vw;'>");
+                            var restAddr = $("<div class='restaurantAddress'>");
+                            var restCuis = $("<div class='restaurantCuisine'>");
+                            
+                            restList.append(nuTile);
+                            restName.text("Name: " + response.restaurants[i].restaurant.name);
+                            restAddr.text("Address: " + response.restaurants[i].restaurant.location.address);
+                            restCuis.text("Cuisine: " + response.restaurants[i].restaurant.cuisines);
+                            nuTile.append(restName,restAddr,restCuis);
 
                     //Here we are establishing a new map in place of the old one
                     var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
@@ -134,46 +149,4 @@ function test(setting1, setting2) {
                             var pushpin = new Microsoft.Maps.Pushpin(estabLoc, { title: response.restaurants[i].restaurant.name, subTitle: response.restaurants[i].restaurant.cuisines, enableHoverStyle: true, enableClickedStyle: true });
                             map.entities.push(pushpin);
                         }
-
-                    }
-
-                    var coord = {
-                        lat: avgLat,
-                        lon: avgLon
-                    };
-                    return coord;
-                }).then(function (coord) {
-                    console.log(coord);
-                    var foodUrl = "https://developers.zomato.com/api/v2.1/search?count=10&lat=" + coord.lat + "&lon=" + coord.lon + "&radius=3219";
-                    $.ajax({
-                        url: foodUrl,
-                        headers: {
-                            'user-key': "0b0b28bbc4c8c280f62ef50d44784da7"
-                        },
-                        method: 'GET'
-                    }).then(function (response) {
-                        console.log(response);
-                        console.log(response.restaurants);
-                        console.log(response.restaurants[0]);
-                        for (let i = 0; i < response.restaurants.length; i++) {
-                            let restList = $(".restaurant-list");
-                            let result = response.restaurants[i];
-
-                            var nuTile = $("<div class ='tile'>");
-                            var restName = $("<div class='restaurantName' style='font-size:3vw;'>");
-                            var restAddr = $("<div class='restaurantAddress'>");
-                            var restCuis = $("<div class='restaurantCuisine'>");
-                            var nuBtn = $("<a class='button is-danger modal-button' data-target='#modal'>View</a>");
-
-                            restList.append(nuTile);
-                            restName.text("Name: " + response.restaurants[i].restaurant.name);
-                            restAddr.text("Address: " + response.restaurants[i].restaurant.location.address);
-                            restCuis.text("Cuisine: " + response.restaurants[i].restaurant.cuisines);
-                            nuTile.append(restName,restAddr,restCuis,nuBtn);
-
-                        }
-                    });
-                });
-        })
-});
-}});
+                    }}})})})}})
