@@ -13,9 +13,6 @@ $(".modal-close").click(function () {
 $(document).ready(function () {
     //On click should set variables for the input fields
     $("#submitAddresses").on("click", function () {
-
-
-
         
     let streetOne = $("#streetOne").val();
     let cityOne = $("#cityOne").val();
