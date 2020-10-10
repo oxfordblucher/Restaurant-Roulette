@@ -14,6 +14,9 @@ $(".modal-close").click(function () {
 $(document).ready(function () {
     //On click should set variables for the input fields
     $("#submitAddresses").on("click", function () {
+
+    let bingLoc = "";
+
         
     let streetOne = $("#streetOne").val();
     let cityOne = $("#cityOne").val();
@@ -69,13 +72,33 @@ function test(setting1, setting2) {
                     var avgLon = (lon1 + lon2) / 2;
                     console.log(avgLat, avgLon);
                     //Bing requires funky formatting, so I've included it here.
-                    let bingLoc = new Microsoft.Maps.Location(avgLat, avgLon);
+                    bingLoc = new Microsoft.Maps.Location(avgLat, avgLon);
+
+                    
+                    var coord = {
+                        lat: avgLat,
+                        lon: avgLon
+                    };
+                    return coord;
+                }).then(function (coord) {
+                    console.log(coord);
+                    var foodUrl = "https://developers.zomato.com/api/v2.1/search?count=10&lat=" + coord.lat + "&lon=" + coord.lon + "&radius=3219";
+                    $.ajax({
+                        url: foodUrl,
+                        headers: {
+                            'user-key': "0b0b28bbc4c8c280f62ef50d44784da7"
+                        },
+                        method: 'GET'
+                    }).then(function (response) {
+                        console.log(response);
+                        console.log(response.restaurants[0].restaurant.location.latitude);
 
                     //Here we are establishing a new map in place of the old one
                     var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
                         credentials: 'ApFZwBlF5C4sFUrPWvHt7DxQbosvOYl24WTQE-GGMHphkpiCCHm14tkZq0S8CvJZ'
                     });
-                    //With the attributes
+
+                    //With the attributes...
                     map.setView({
                         //set to the avgLat and avgLon coordinates
                         mapTypeId: Microsoft.Maps.MapTypeId.road,
@@ -89,7 +112,7 @@ function test(setting1, setting2) {
                         var circle = createCircle(bingLoc, 2, 'rgba(0,0,150,0.2)');
                         //After we've define it, we push it to our map as an entity.
                         map.entities.push(circle);
-                        pinPlace();
+                        pushPin();
                     })
 
                     function createCircle(bingLoc, radius, color) {
@@ -98,11 +121,17 @@ function test(setting1, setting2) {
                         //Once we have the radius mapped, let's call the Zomato API's coordinate array, call a for loop that maps different pins across the board.
 
                     }
-                    function pinPlace() {
-                        var pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), { text: 'A', title: 'Location', subTitle: 'Cafe', enableHoverStyle: true, enableClickedStyle: true });
-                        console.log(pushpin.metadata);
-                        map.entities.push(pushpin);
+
+                    function pushPin(){
+                        for (i=0; i<10; i++){
+                            let estabLoc = new Microsoft.Maps.Location(response.restaurants[i].restaurant.location.latitude, response.restaurants[i].restaurant.location.longitude);
+                            var pushpin = new Microsoft.Maps.Pushpin(estabLoc, { title: response.restaurants[i].restaurant.name, subTitle: response.restaurants[i].restaurant.cuisines, enableHoverStyle: true, enableClickedStyle: true });
+                            map.entities.push(pushpin);
+                        }
+
                     }
+
+                    
                     var coord = {
                         lat: avgLat,
                         lon: avgLon
@@ -141,36 +170,11 @@ function test(setting1, setting2) {
                     });
                 });
         })
-}
 });
-//Map Section
-
+//Default Map for on Load
 function GetMap() {
-    let map = new Microsoft.Maps.Map('#myMap', {
+    new Microsoft.Maps.Map('#myMap', {
         credentials: 'ApFZwBlF5C4sFUrPWvHt7DxQbosvOYl24WTQE-GGMHphkpiCCHm14tkZq0S8CvJZ'
     });
-
-
-
-    Microsoft.Maps.loadModule('Microsoft.Maps.SpatialMath', function () {
-        var center = map.getCenter();
-        //createCircle is a Bing pre-baked function that uses a location, radius, and color to create a circle polygon element
-        var circle = createCircle(center, 2, 'rgba(0,0,150,0.2)');
-        //After we've define it, we push it to our map as an entity.
-        map.entities.push(circle);
-        pinPlace();
-    })
-
-    //     function createCircle(center, radius, color){
-    //         var locs = Microsoft.Maps.SpatialMath.getRegularPolygon(center, radius, 36, Microsoft.Maps.SpatialMath.DistanceUnits.Miles);
-    //         return new Microsoft.Maps.Polygon(locs, {fillColor: color, strokeThickness: 0});
-    //         //Once we have the radius mapped, let's call the Zomato API's coordinate array, call a for loop that maps different pins across the board.
-
-    //     }
-
-
-
 }
-
-
-
+}});
