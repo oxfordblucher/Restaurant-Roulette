@@ -130,6 +130,8 @@ function test(setting1, setting2) {
                         }
 
                     }
+
+                    
                     var coord = {
                         lat: avgLat,
                         lon: avgLon
@@ -168,7 +170,6 @@ function test(setting1, setting2) {
                     });
                 });
         })
-}
 });
 //Default Map for on Load
 function GetMap() {
@@ -176,6 +177,4 @@ function GetMap() {
         credentials: 'ApFZwBlF5C4sFUrPWvHt7DxQbosvOYl24WTQE-GGMHphkpiCCHm14tkZq0S8CvJZ'
     });
 }
-
-
-
+}});
