@@ -62,7 +62,9 @@
                     </div>
                     <div class="control has-icons-left has-icons-right">
                         <input id="codeTwo" class="input is-primary" type="number" placeholder="Postal Code">
-                        <div class="control">
+                        <div class="control"><br>
+                          
+                          <div><input class="input" type="text" placeholder="Text input"></div>
                           <div class="field has-addons">
                             <div class="control is-expanded">
                               <label class="label">Sort By</label>
@@ -76,6 +78,63 @@
                               </div>
                             </div>
                           </div>
+
+                          <div>
+                            
+                              <div><strong>Filters</strong></div><br>
+                              
+                              <div class="distance"><strong>Distance</strong></div>
+                              <div class="control">
+                                <label class="radio">
+                                  <input id="halfMile" type="radio" name="answer">
+                                  0.5 miles
+                                </label>
+                                <div>
+                                  <label class="radio">
+                                    <input id="oneMile" type="radio" name="answer">
+                                    1 miles
+                                  </label>
+                                </div>
+                                <div>
+                                  <label class="radio">
+                                    <input id="twoMile" type="radio" name="answer">
+                                    2 miles
+                                  </label>
+                                </div>
+                                <div>
+                                  <label class="radio">
+                                    <input id="threeMile" type="radio" name="answer">
+                                    3 miles
+                                  </label>
+                                </div><br>
+                              </div>
+                              
+                              <div class="price"><strong>Price</strong></div>
+                              <div class="control">
+                                <label class="radio">
+                                  <input id="range1" type="radio" name="answer">
+                                  $0 - $10
+                                </label>
+                                <div>
+                                  <label class="radio">
+                                    <input id="range2" type="radio" name="answer">
+                                    $10 - $20
+                                  </label>
+                                </div>
+                                <div>
+                                  <label class="radio">
+                                    <input id="range3" type="radio" name="answer">
+                                    $20 - $30
+                                  </label>
+                                </div>
+                                <div>
+                                  <label class="radio">
+                                    <input id="range4" type="radio" name="answer">
+                                    $30 - $40
+                                  </label>
+                                </div><br>
+                              </div> 
+                          
                             <!--This is button should submit the above data-->
                             <button id="submitAddresses" class="button is-primary">Submit</button>
                         </div>
@@ -83,67 +142,14 @@
                 </div>
             </div>
     </div>
+    </div>
   
     <div class="box">
-      <!-- <div class="columns">
+      <div class="columns">
         
-        <div class="column is-one-quarter">
-          <div><strong>Filters</strong></div><br>
-          
-          <div class="distance"><strong>Distance</strong></div>
-          <div class="control">
-            <label class="radio">
-              <input id="halfMile" type="radio" name="answer">
-              0.5 miles
-            </label>
-            <div>
-              <label class="radio">
-                <input id="oneMile" type="radio" name="answer">
-                1 miles
-              </label>
-            </div>
-            <div>
-              <label class="radio">
-                <input id="twoMile" type="radio" name="answer">
-                2 miles
-              </label>
-            </div>
-            <div>
-              <label class="radio">
-                <input id="threeMile" type="radio" name="answer">
-                3 miles
-              </label>
-            </div><br>
-          </div>
-          
-          <div class="price"><strong>Price</strong></div>
-          <div class="control">
-            <label class="radio">
-              <input id="range1" type="radio" name="answer">
-              $0 - $10
-            </label>
-            <div>
-              <label class="radio">
-                <input id="range2" type="radio" name="answer">
-                $10 - $20
-              </label>
-            </div>
-            <div>
-              <label class="radio">
-                <input id="range3" type="radio" name="answer">
-                $20 - $30
-              </label>
-            </div>
-            <div>
-              <label class="radio">
-                <input id="range4" type="radio" name="answer">
-                $30 - $40
-              </label>
-            </div><br>
-          </div> -->
         </div>
         <!-- Restaurant list -->
-      <div class="column is-8 restaurant-list">
+      <div class="column is-half restaurant-list">
         
       </div>
         <!-- Map -->
