@@ -1,26 +1,12 @@
-
 let streetOne = "";
 let cityOne = "";
 let stateOne = "";
 let streetTwo = "";
 let cityTwo = "";
 let stateTwo = "";
-firstFill == false;
-
+let firstFill = false;
+let firstInput = "";
 function GetMap() {
-    Microsoft.Maps.loadModule('Microsoft.Maps.AutoSuggest', {
-        callback: function () {
-            var manager = new Microsoft.Maps.AutosuggestManager({
-                placeSuggestions: true
-            });
-            manager.attachAutosuggest('#streetOne', '#autoOne', selectedSuggestion);
-            
-        },
-        errorCallback: function(msg){
-            alert(msg);
-        },
-        credentials: 'ApFZwBlF5C4sFUrPWvHt7DxQbosvOYl24WTQE-GGMHphkpiCCHm14tkZq0S8CvJZ' 
-    });
     Microsoft.Maps.loadModule('Microsoft.Maps.AutoSuggest', {
         callback: function () {
             var manager = new Microsoft.Maps.AutosuggestManager({
@@ -31,24 +17,88 @@ function GetMap() {
         errorCallback: function(msg){
             console.log(msg);
         },
-        credentials: 'ApFZwBlF5C4sFUrPWvHt7DxQbosvOYl24WTQE-GGMHphkpiCCHm14tkZq0S8CvJZ' 
-    });
-}
-
-function selectedSuggestion(result) {
-    console.log(result);  ;
-    if(!firstFill){
+        credentials: 'ApFZwBlF5C4sFUrPWvHt7DxQbosvOYl24WTQE-GGMHphkpiCCHm14tkZq0S8CvJZ'
         
+    });
+    Microsoft.Maps.loadModule('Microsoft.Maps.AutoSuggest', {
+        callback: function () {
+            var manager = new Microsoft.Maps.AutosuggestManager({
+                placeSuggestions: true
+            });
+            manager.attachAutosuggest('#streetOne', '#autoOne', selectedSuggestion);
+        },
+        errorCallback: function(msg){
+            console.log(msg);
+        },
+        credentials: 'ApFZwBlF5C4sFUrPWvHt7DxQbosvOYl24WTQE-GGMHphkpiCCHm14tkZq0S8CvJZ'
+        
+    });   
+}
+function selectedSuggestion(result) {
+    if(!firstFill){
         streetOne = result.address.addressLine || '';
         cityOne = result.address.locality || '';
         stateOne = result.address.adminDistrict || '';
+        document.getElementById('streetOne').value = result.formattedSuggestion;
+        firstInput = result.formattedSuggestion
         firstFill = true;
-    }  else {
+    }else{
         streetTwo = result.address.addressLine || '';
         cityTwo = result.address.locality || '';
         stateTwo = result.address.adminDistrict || '';
+        document.getElementById('streetTwo').value = result.formattedSuggestion;
+        document.getElementById('streetOne').value = firstInput;
     }
+
+
 }
+
+
+// function GetMap() {
+//     Microsoft.Maps.loadModule('Microsoft.Maps.AutoSuggest', {
+//         callback: function () {
+//             var manager = new Microsoft.Maps.AutosuggestManager({
+//                 placeSuggestions: true
+//             });
+//             manager.attachAutosuggest('#streetTwo', '#autoTwo', selectedSuggestion);
+//         },
+//         errorCallback: function(msg){
+//             console.log(msg);
+//         },
+//         credentials: 'ApFZwBlF5C4sFUrPWvHt7DxQbosvOYl24WTQE-GGMHphkpiCCHm14tkZq0S8CvJZ' 
+//     });
+//     Microsoft.Maps.loadModule('Microsoft.Maps.AutoSuggest', {
+//         callback: function () {
+//             var manager = new Microsoft.Maps.AutosuggestManager({
+//                 placeSuggestions: true
+//             });
+//             manager.attachAutosuggest('#streetOne', '#autoOne', selectedSuggestion);
+            
+//         },
+//         errorCallback: function(msg){
+//             console.log(msg);
+//         },
+//         credentials: 'ApFZwBlF5C4sFUrPWvHt7DxQbosvOYl24WTQE-GGMHphkpiCCHm14tkZq0S8CvJZ' 
+//     });
+// }
+
+
+// function selectedSuggestion(result) {
+    
+//     if(!firstFill){
+       
+//         streetOne = result.address.addressLine || '';
+//         cityOne = result.address.locality || '';
+//         stateOne = result.address.adminDistrict || '';
+//         document.getElementById('streetOne').value = streetOne + ", " + cityOne + ", " + stateOne; 
+//     }  else {
+//         streetTwo = result.address.addressLine || '';
+//         cityTwo = result.address.locality || '';
+//         stateTwo = result.address.adminDistrict || '';
+//         document.getElementById('streetOne').value = streetOne + ", " + cityOne + ", " + stateOne; 
+//         document.getElementById('streetTwo').value = streetTwo + ", " + cityTwo + ", " + stateTwo; 
+//     }
+// }
  
 
     var zomatoCall = "";
