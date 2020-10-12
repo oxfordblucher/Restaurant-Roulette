@@ -211,8 +211,11 @@ function selectedSuggestion(result) {
                                 });
 
                                 $("#closeModalbg, #closeModalx").click(function(){
-                                    $("#modal").attr("style", "display: none")
+                                    $("#modal").attr("style", "display: none");
+
                                 })
+
+                               
 
                             }
                             //Creates a map
@@ -230,14 +233,43 @@ function selectedSuggestion(result) {
                             //Create 10 pushpins on the map at the 10 locations, listed in their array order
                             Microsoft.Maps.loadModule('Microsoft.Maps.SpatialMath', function () {
                                 for (i = 0; i < 10; i++) {
+                                    console.log("Hello")
                                     result = zomatoCall.restaurants[i];
                                     let label = (i+1).toString();
                                     let estabLoc = new Microsoft.Maps.Location(result.restaurant.location.latitude, result.restaurant.location.longitude);
                                     var pushpin = new Microsoft.Maps.Pushpin(estabLoc, { text: label, title: result.restaurant.name, subTitle: result.restaurant.cuisines, enableHoverStyle: true});
-                                    Microsoft.Maps.Events.addHandler(pushpin, 'click', function () {  $("#modal").attr("style", "display: block")  
+                                    Microsoft.Maps.Events.addHandler(pushpin, 'click', function () {  
+                                    $(".modal-card-body").html("");
+                                    $("#modal").attr("style", "display: block");
+                                    indexCall = parseInt(label) - 1;
+                                    $(".modal-card-title").text( zomatoCall.restaurants[indexCall].restaurant.name);
+                                            
+                                    var restIMG = $("<img class ='restaurantIMG' alt='Featured Image'>");
+                                    restIMG.attr("src",  zomatoCall.restaurants[indexCall].restaurant.featured_image);
+                                    
+                                    var modalPrice = $("<div class='row is-full'>");
+                                    var priceRange = parseInt( zomatoCall.restaurants[indexCall].restaurant.price_range)
+                                    modalPrice.text("Price Range: " + "$".repeat(priceRange));
+
+                                    var modalPhone = $("<div class='row is-full'>");
+                                    modalPhone.text("Phone number(s): " +  zomatoCall.restaurants[indexCall].restaurant.phone_numbers)
+
+                                    var modalTime = $("<div class='row is-full'>");
+                                    modalTime.text("Hours: " +  zomatoCall.restaurants[indexCall].restaurant.timings);
+
+                                    var modalRate = $("<div class='row is-full'>");
+                                    modalRate.text("Rating: " +  zomatoCall.restaurants[indexCall].restaurant.user_rating.aggregate_rating);
+                                    modalRate.append($("<br>"), "(A '0' usually denotes a lack of ratings.)")
+
+                                    var modalLink = $("<a target='_blank'>Zomato Page</a>");
+                                    modalLink.attr("href",  zomatoCall.restaurants[indexCall].restaurant.url);
+
+                                    $(".modal-card-body").append(restIMG, modalPrice, modalPhone, modalTime, modalRate, modalLink)
                                     }); 
                                     map.entities.push(pushpin);
+
                                 }
+
                             });
 
                         });
