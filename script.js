@@ -1,22 +1,66 @@
 
-// A $( document ).ready() block.
-$(document).ready(function () {
+let streetOne = "";
+let cityOne = "";
+let stateOne = "";
+let streetTwo = "";
+let cityTwo = "";
+let stateTwo = "";
+firstFill == false;
 
-    //On click should set variables for the input fields
+function GetMap() {
+    Microsoft.Maps.loadModule('Microsoft.Maps.AutoSuggest', {
+        callback: function () {
+            var manager = new Microsoft.Maps.AutosuggestManager({
+                placeSuggestions: true
+            });
+            manager.attachAutosuggest('#streetOne', '#autoOne', selectedSuggestion);
+            
+        },
+        errorCallback: function(msg){
+            alert(msg);
+        },
+        credentials: 'ApFZwBlF5C4sFUrPWvHt7DxQbosvOYl24WTQE-GGMHphkpiCCHm14tkZq0S8CvJZ' 
+    });
+    Microsoft.Maps.loadModule('Microsoft.Maps.AutoSuggest', {
+        callback: function () {
+            var manager = new Microsoft.Maps.AutosuggestManager({
+                placeSuggestions: true
+            });
+            manager.attachAutosuggest('#streetTwo', '#autoTwo', selectedSuggestion);
+        },
+        errorCallback: function(msg){
+            console.log(msg);
+        },
+        credentials: 'ApFZwBlF5C4sFUrPWvHt7DxQbosvOYl24WTQE-GGMHphkpiCCHm14tkZq0S8CvJZ' 
+    });
+}
+
+function selectedSuggestion(result) {
+    console.log(result);  ;
+    if(!firstFill){
+        
+        streetOne = result.address.addressLine || '';
+        cityOne = result.address.locality || '';
+        stateOne = result.address.adminDistrict || '';
+        firstFill = true;
+    }  else {
+        streetTwo = result.address.addressLine || '';
+        cityTwo = result.address.locality || '';
+        stateTwo = result.address.adminDistrict || '';
+    }
+}
+ 
+
+       //On click should set variables for the input fields
     $("#submitAddresses").on("click", function () {
 
         $(".restaurant-list").html("");
 
         let bingLoc = "";
-        let streetOne = $("#streetOne").val();
-        let cityOne = $("#cityOne").val();
-        let stateOne = $("#stateOne").val();
-
-        let streetTwo = $("#streetTwo").val();
-        let cityTwo = $("#cityTwo").val();
-        let stateTwo = $("#stateTwo").val();
 
         let userQuery = $("#userQuery").val();
+        
+    
 
         var setting1 = {
             "async": true,
@@ -62,7 +106,7 @@ $(document).ready(function () {
                         var avgLat = (lat1 + lat2) / 2;
                         var avgLon = (lon1 + lon2) / 2;
                         console.log(avgLat, avgLon);
-                        //Bing requires funky formatting, so I've included it here.
+                        //Bing requires specific location formatting, this translates our lat and lon into Bing's requirements.
                         bingLoc = new Microsoft.Maps.Location(avgLat, avgLon);
 
                         var coord = {
@@ -168,13 +212,10 @@ $(document).ready(function () {
                                 }
                             });
 
-                                
-
-
-                        })
+                        });
                     })
-            })
+            });
     }
-});
+
 
 
