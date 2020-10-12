@@ -126,7 +126,7 @@ $(document).ready(function () {
                                 var restCuis = $("<div class='restaurantCuisine row is-full'>");
 
                                 restList.append(nuTile);
-                                restName.text("Name: " + response.restaurants[i].restaurant.name);
+                                restName.text((i+1) +") " + response.restaurants[i].restaurant.name);
                                 restAddr.text("Address: " + response.restaurants[i].restaurant.location.address);
                                 restCuis.text("Cuisine: " + response.restaurants[i].restaurant.cuisines);
                                 nuTile.append(restName, restAddr, restCuis);
