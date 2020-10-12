@@ -51,7 +51,10 @@ function selectedSuggestion(result) {
 }
  
 
-       //On click should set variables for the input fields
+    var zomatoCall = "";
+    var result = "";
+
+    //On click should set variables for the input fields
     $("#submitAddresses").on("click", function () {
 
         $(".restaurant-list").html("");
@@ -137,7 +140,9 @@ function selectedSuggestion(result) {
                             }
                         }
 
-                        var foodUrl = "https://developers.zomato.com/api/v2.1/search?q" + userQuery + "count=20&lat=" + coord.lat + "&lon=" + coord.lon + "&radius=" + radius + "&sort=" + sortFunc + "&order=" + selectedOrd;
+                        var userQuery = $("#userQuery").val();
+
+                        var foodUrl = "https://developers.zomato.com/api/v2.1/search?q=" + userQuery + "&count=20&lat=" + coord.lat + "&lon=" + coord.lon + "&radius=" + radius + "&sort=" + sortFunc + "&order=" + selectedOrd;
                         
                         console.log(foodUrl);
                         
@@ -148,38 +153,59 @@ function selectedSuggestion(result) {
                             },
                             method: 'GET'
                         }).then(function (response) {
-                            console.log(response);
-                            console.log(response.restaurants);
-                            console.log(response.restaurants[0]);
-                            
+                            zomatoCall = response;                           
+                            console.log(zomatoCall);
 
-
-                            for (let i = 0; i < response.restaurants.length; i++) {
+                            for (let i = 0; i < zomatoCall.restaurants.length; i++) {
                                 if (i === 10) {
                                     break;
                                 }
                                 let restList = $(".restaurant-list");
-                                let result = response.restaurants[i];
+                                let result = zomatoCall.restaurants[i];
 
                                 //This creates the div tile 
                                 var nuTile = $("<div class ='tile rows' id='modal-button' data-target='#modal'>");
                                 //This attaches a dynamic ID the will be able to append the restaurant information on click
-                                nuTile.attr("id", "restNo" + i);
+                                nuTile.attr("id", result.restaurant.name);
                                 var restName = $("<div class='restaurantName row is-full'>");
                                 var restAddr = $("<div class='restaurantAddress row is-full'>");
                                 var restCuis = $("<div class='restaurantCuisine row is-full'>");
 
                                 restList.append(nuTile);
-                                restName.text("Name: " + response.restaurants[i].restaurant.name);
-                                restAddr.text("Address: " + response.restaurants[i].restaurant.location.address);
-                                restCuis.text("Cuisine: " + response.restaurants[i].restaurant.cuisines);
+                                restName.text(result.restaurant.name);
+                                restAddr.text(result.restaurant.location.address);
+                                restCuis.text(result.restaurant.cuisines);
                                 nuTile.append(restName, restAddr, restCuis);
                                 //Here we are adding a click listener so that whenever the nuTile div is clicked, it opens the modal.
                                 nuTile.click(function(){
-                                    $("#modal").attr("style", "display: block")
-                                    //-----------------------------------------------------
+                                    $(".modal-card-body").html("");
+                                    $("#modal").attr("style", "display: block");
                                     //text appending to the modal should go here!
-                                    //-----------------------------------------------------
+                                    if(this.id === result.restaurant.name) {
+                                        $(".modal-card-title").text(result.restaurant.name);
+                                        
+                                        var restIMG = $("<img class ='restaurantIMG' alt='Featured Image'>");
+                                        restIMG.attr("src", result.restaurant.featured_image);
+
+                                        var modalPrice = $("<div class='row is-full'>");
+                                        var priceRange = parseInt(result.restaurant.price_range)
+                                        modalPrice.text("Price Range: " + "$".repeat(priceRange));
+
+                                        var modalPhone = $("<div class='row is-full'>");
+                                        modalPhone.text("Phone number(s): " + result.restaurant.phone_numbers)
+
+                                        var modalTime = $("<div class='row is-full'>");
+                                        modalTime.text("Hours: " + result.restaurant.timings);
+
+                                        var modalRate = $("<div class='row is-full'>");
+                                        modalRate.text("Rating: " + result.restaurant.user_rating.aggregate_rating);
+                                        modalRate.append($("<br>"), "(A '0' usually denotes a lack of ratings.)")
+
+                                        var modalLink = $("<a target='_blank'>Zomato Page</a>");
+                                        modalLink.attr("href", result.restaurant.url);
+
+                                        $(".modal-card-body").append(restIMG, modalPrice, modalPhone, modalTime, modalRate, modalLink);
+                                    }
                                     
                                 });
 
@@ -203,11 +229,12 @@ function selectedSuggestion(result) {
                             //Create 10 pushpins on the map at the 10 locations, listed in their array order
                             Microsoft.Maps.loadModule('Microsoft.Maps.SpatialMath', function () {
                                 for (i = 0; i < 10; i++) {
+                                    result = zomatoCall.restaurants[i];
                                     let label = (i+1).toString();
-                                    let estabLoc = new Microsoft.Maps.Location(response.restaurants[i].restaurant.location.latitude, response.restaurants[i].restaurant.location.longitude);
-                                    var pushpin = new Microsoft.Maps.Pushpin(estabLoc, { text: label, title: response.restaurants[i].restaurant.name, subTitle: response.restaurants[i].restaurant.cuisines, enableHoverStyle: true});
+                                    let estabLoc = new Microsoft.Maps.Location(result.restaurant.location.latitude, result.restaurant.location.longitude);
+                                    var pushpin = new Microsoft.Maps.Pushpin(estabLoc, { text: label, title: result.restaurant.name, subTitle: result.restaurant.cuisines, enableHoverStyle: true});
                                     Microsoft.Maps.Events.addHandler(pushpin, 'click', function () {  $("#modal").attr("style", "display: block")  
-                                    });
+                                    }); 
                                     map.entities.push(pushpin);
                                 }
                             });
