@@ -93,7 +93,9 @@ $(document).ready(function () {
                             }
                         }
 
-                        var foodUrl = "https://developers.zomato.com/api/v2.1/search?q" + userQuery + "count=20&lat=" + coord.lat + "&lon=" + coord.lon + "&radius=" + radius + "&sort=" + sortFunc + "&order=" + selectedOrd;
+                        var userQuery = $("#userQuery").val();
+
+                        var foodUrl = "https://developers.zomato.com/api/v2.1/search?q=" + userQuery + "&count=20&lat=" + coord.lat + "&lon=" + coord.lon + "&radius=" + radius + "&sort=" + sortFunc + "&order=" + selectedOrd;
                         
                         console.log(foodUrl);
                         
