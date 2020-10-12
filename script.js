@@ -222,7 +222,7 @@ function selectedSuggestion(result) {
                                 var restCuis = $("<div class='restaurantCuisine row is-full'>");
 
                                 restList.append(nuTile);
-                                restName.text(result.restaurant.name);
+                                restName.text((i+1) +") " + response.restaurants[i].restaurant.name);
                                 restAddr.text(result.restaurant.location.address);
                                 restCuis.text(result.restaurant.cuisines);
                                 nuTile.append(restName, restAddr, restCuis);
@@ -237,17 +237,17 @@ function selectedSuggestion(result) {
                                         var restIMG = $("<img class ='restaurantIMG' alt='Featured Image'>");
                                         restIMG.attr("src", result.restaurant.featured_image);
 
-                                        var modalPrice = $("<div class='row is-full'>");
+                                        var modalPrice = $("<div class='row is-full info'>");
                                         var priceRange = parseInt(result.restaurant.price_range)
                                         modalPrice.text("Price Range: " + "$".repeat(priceRange));
 
-                                        var modalPhone = $("<div class='row is-full'>");
+                                        var modalPhone = $("<div class='row is-full info'>");
                                         modalPhone.text("Phone number(s): " + result.restaurant.phone_numbers)
 
-                                        var modalTime = $("<div class='row is-full'>");
+                                        var modalTime = $("<div class='row is-full info'>");
                                         modalTime.text("Hours: " + result.restaurant.timings);
 
-                                        var modalRate = $("<div class='row is-full'>");
+                                        var modalRate = $("<div id='rate' class='row is-full'>");
                                         modalRate.text("Rating: " + result.restaurant.user_rating.aggregate_rating);
                                         modalRate.append($("<br>"), "(A '0' usually denotes a lack of ratings.)")
 
