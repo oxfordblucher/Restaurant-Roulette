@@ -108,29 +108,7 @@ $(document).ready(function () {
                             console.log(response.restaurants);
                             console.log(response.restaurants[0]);
                             
-                            //Creates a map
-                            var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
-                                credentials: 'ApFZwBlF5C4sFUrPWvHt7DxQbosvOYl24WTQE-GGMHphkpiCCHm14tkZq0S8CvJZ'
-                            });
-                            
-                            //With the attributes...
-                            map.setView({
-                                //set to the avgLat and avgLon coordinates
-                                mapTypeId: Microsoft.Maps.MapTypeId.road,
-                                center: bingLoc,
-                                zoom: 12
-                            });
-                            //Create 10 pushpins on the map at the 10 locations, listed in their array order
-                            Microsoft.Maps.loadModule('Microsoft.Maps.SpatialMath', function () {
-                                for (i = 0; i < 10; i++) {
-                                    let label = (i+1).toString();
-                                    let estabLoc = new Microsoft.Maps.Location(response.restaurants[i].restaurant.location.latitude, response.restaurants[i].restaurant.location.longitude);
-                                    var pushpin = new Microsoft.Maps.Pushpin(estabLoc, { text: label, title: response.restaurants[i].restaurant.name, subTitle: response.restaurants[i].restaurant.cuisines, enableHoverStyle: true, enableClickedStyle: true });
-                                    Microsoft.Maps.Events.addHandler(pushpin, 'click', function () { $("#modal").data("target").addClass("is-active");   
-                                    });
-                                    map.entities.push(pushpin);
-                                }
-                            });
+
 
                             for (let i = 0; i < response.restaurants.length; i++) {
                                 if (i === 10) {
@@ -166,7 +144,29 @@ $(document).ready(function () {
                                 })
 
                             }
+                            //Creates a map
+                            var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                                credentials: 'ApFZwBlF5C4sFUrPWvHt7DxQbosvOYl24WTQE-GGMHphkpiCCHm14tkZq0S8CvJZ'
+                            });
                             
+                            //With the attributes...
+                            map.setView({
+                                //set to the avgLat and avgLon coordinates
+                                mapTypeId: Microsoft.Maps.MapTypeId.road,
+                                center: bingLoc,
+                                zoom: 12
+                            });
+                            //Create 10 pushpins on the map at the 10 locations, listed in their array order
+                            Microsoft.Maps.loadModule('Microsoft.Maps.SpatialMath', function () {
+                                for (i = 0; i < 10; i++) {
+                                    let label = (i+1).toString();
+                                    let estabLoc = new Microsoft.Maps.Location(response.restaurants[i].restaurant.location.latitude, response.restaurants[i].restaurant.location.longitude);
+                                    var pushpin = new Microsoft.Maps.Pushpin(estabLoc, { text: label, title: response.restaurants[i].restaurant.name, subTitle: response.restaurants[i].restaurant.cuisines, enableHoverStyle: true});
+                                    Microsoft.Maps.Events.addHandler(pushpin, 'click', function () {  $("#modal").attr("style", "display: block")  
+                                    });
+                                    map.entities.push(pushpin);
+                                }
+                            });
 
                                 
 
@@ -176,12 +176,5 @@ $(document).ready(function () {
             })
     }
 });
-
-function GetMap() {
-    var map = new Microsoft.Maps.Map('#myMap', {
-        credentials: 'ApFZwBlF5C4sFUrPWvHt7DxQbosvOYl24WTQE-GGMHphkpiCCHm14tkZq0S8CvJZ',
-
-    });
-}
 
 
