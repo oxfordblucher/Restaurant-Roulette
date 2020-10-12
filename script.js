@@ -111,12 +111,12 @@ $(document).ready(function () {
                                 let result = response.restaurants[i];
 
                                 //This creates the div tile 
-                                var nuTile = $("<div class ='tile' id='modal-button' data-target='#modal'>");
+                                var nuTile = $("<div class ='tile rows' id='modal-button' data-target='#modal'>");
                                 //This attaches a dynamic ID the will be able to append the restaurant information on click
                                 nuTile.attr("id", "restNo" + i);
-                                var restName = $("<div class='restaurantName' style='font-size:3vw;'>");
-                                var restAddr = $("<div class='restaurantAddress'>");
-                                var restCuis = $("<div class='restaurantCuisine'>");
+                                var restName = $("<div class='restaurantName row is-full'>");
+                                var restAddr = $("<div class='restaurantAddress row is-full'>");
+                                var restCuis = $("<div class='restaurantCuisine row is-full'>");
 
                                 restList.append(nuTile);
                                 restName.text("Name: " + response.restaurants[i].restaurant.name);
