@@ -2,6 +2,9 @@
 // A $( document ).ready() block.
 $(document).ready(function () {
 
+    var zomatoCall = "";
+    var result = "";
+
     //On click should set variables for the input fields
     $("#submitAddresses").on("click", function () {
 
@@ -106,38 +109,41 @@ $(document).ready(function () {
                             },
                             method: 'GET'
                         }).then(function (response) {
-                            console.log(response);
-                            console.log(response.restaurants);
-                            console.log(response.restaurants[0]);
-                            
+                            zomatoCall = response;                           
+                            console.log(zomatoCall);
 
-
-                            for (let i = 0; i < response.restaurants.length; i++) {
+                            for (let i = 0; i < zomatoCall.restaurants.length; i++) {
                                 if (i === 10) {
                                     break;
                                 }
                                 let restList = $(".restaurant-list");
-                                let result = response.restaurants[i];
+                                let result = zomatoCall.restaurants[i];
 
                                 //This creates the div tile 
                                 var nuTile = $("<div class ='tile rows' id='modal-button' data-target='#modal'>");
                                 //This attaches a dynamic ID the will be able to append the restaurant information on click
-                                nuTile.attr("id", "restNo" + i);
+                                nuTile.attr("id", result.restaurant.name);
                                 var restName = $("<div class='restaurantName row is-full'>");
                                 var restAddr = $("<div class='restaurantAddress row is-full'>");
                                 var restCuis = $("<div class='restaurantCuisine row is-full'>");
 
                                 restList.append(nuTile);
-                                restName.text("Name: " + response.restaurants[i].restaurant.name);
-                                restAddr.text("Address: " + response.restaurants[i].restaurant.location.address);
-                                restCuis.text("Cuisine: " + response.restaurants[i].restaurant.cuisines);
+                                restName.text(result.restaurant.name);
+                                restAddr.text(result.restaurant.location.address);
+                                restCuis.text(result.restaurant.cuisines);
                                 nuTile.append(restName, restAddr, restCuis);
                                 //Here we are adding a click listener so that whenever the nuTile div is clicked, it opens the modal.
                                 nuTile.click(function(){
+                                    $("")
                                     $("#modal").attr("style", "display: block")
-                                    //-----------------------------------------------------
                                     //text appending to the modal should go here!
-                                    //-----------------------------------------------------
+                                    if(this.id === result.restaurant.name) {
+                                        $(".modal-card-title").text(result.restaurant.name);
+
+                                        var restIMG = $("<img class ='restaurantIMG' alt='Featured Image'>");
+                                        restIMG.attr("src", result.restaurant.featured_image);
+                                        $(".modal-card-body").append(restIMG);
+                                    }
                                     
                                 });
 
@@ -162,8 +168,8 @@ $(document).ready(function () {
                             Microsoft.Maps.loadModule('Microsoft.Maps.SpatialMath', function () {
                                 for (i = 0; i < 10; i++) {
                                     let label = (i+1).toString();
-                                    let estabLoc = new Microsoft.Maps.Location(response.restaurants[i].restaurant.location.latitude, response.restaurants[i].restaurant.location.longitude);
-                                    var pushpin = new Microsoft.Maps.Pushpin(estabLoc, { text: label, title: response.restaurants[i].restaurant.name, subTitle: response.restaurants[i].restaurant.cuisines, enableHoverStyle: true});
+                                    let estabLoc = new Microsoft.Maps.Location(result.restaurant.location.latitude, result.restaurant.location.longitude);
+                                    var pushpin = new Microsoft.Maps.Pushpin(estabLoc, { text: label, title: result.restaurant.name, subTitle: result.restaurant.cuisines, enableHoverStyle: true});
                                     Microsoft.Maps.Events.addHandler(pushpin, 'click', function () {  $("#modal").attr("style", "display: block")  
                                     });
                                     map.entities.push(pushpin);
