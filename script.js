@@ -185,11 +185,12 @@ $(document).ready(function () {
                             //Create 10 pushpins on the map at the 10 locations, listed in their array order
                             Microsoft.Maps.loadModule('Microsoft.Maps.SpatialMath', function () {
                                 for (i = 0; i < 10; i++) {
+                                    result = zomatoCall.restaurants[i];
                                     let label = (i+1).toString();
                                     let estabLoc = new Microsoft.Maps.Location(result.restaurant.location.latitude, result.restaurant.location.longitude);
                                     var pushpin = new Microsoft.Maps.Pushpin(estabLoc, { text: label, title: result.restaurant.name, subTitle: result.restaurant.cuisines, enableHoverStyle: true});
                                     Microsoft.Maps.Events.addHandler(pushpin, 'click', function () {  $("#modal").attr("style", "display: block")  
-                                    });
+                                    }); 
                                     map.entities.push(pushpin);
                                 }
                             });
