@@ -44,9 +44,6 @@
                     <div class="control has-icons-left has-icons-right">
                         <input id="stateOne" class="input is-primary" type="text" placeholder="State">
                     </div>
-                    <div class="control has-icons-left has-icons-right">
-                        <input id="codeOne" class="input is-primary" type="number" placeholder="Postal Code">
-                    </div>
                 </div>
                 <!--This is the Address 2 field-->
                 <div class="field">
@@ -61,80 +58,67 @@
                     <div class="control has-icons-left has-icons-right">
                         <input id="stateTwo" class="input is-primary" type="text" placeholder="State">
                     </div>
-                    <div class="control has-icons-left has-icons-right">
-                        <input id="codeTwo" class="input is-primary" type="number" placeholder="Postal Code">
-                        <div class="control"><br>
-                          
-                          <div><input class="input" type="text" placeholder="Text input"></div>
-                          <div class="field has-addons">
-                            <div class="control is-expanded">
-                              <label class="label">Sort By</label>
+                  </div>
+                        <div class="field">
+                          <label class="label">Query</label>                          
+                        <div class="control has-icons-left has-icons-right">
+                          <input id="userQuery" class="input is-primary" type="text" placeholder="Keyword search">
+                        </div>
+                      </div>
+                          <div class="field">
+                            <label class="label">Sort By</label>
+                            <div class="control">
                               <div class="select is-fullwidth">
-                                <select name="country">
-                                  <option></option>
-                                  <option id="cost">Test Cost</option>
-                                  <option id="distance">Test Distance</option>
-                                  <option id="popularity">Test Popularity</option>
+                                <select id="sortFunc">
+                                  <option value=""></option>
+                                  <option value="cost">Cost</option>
+                                  <option value="real_distance">Distance</option>
+                                  <option value="rating">Popularity</option>
                                 </select>
                               </div>
-                            </div>
-                          </div>
-
-                          <div>
-                            
-                              <div><strong>Filters</strong></div><br>
-                              
-                              <div class="distance"><strong>Distance</strong></div>
-                              <div class="control">
-                                <label class="radio">
-                                  <input id="halfMile" type="radio" name="answer">
-                                  0.5 miles
-                                </label>
                                 <div>
                                   <label class="radio">
-                                    <input id="oneMile" type="radio" name="answer">
-                                    1 miles
+                                    <input value="asc" type="radio" name="sortOrd">
+                                    Ascend
                                   </label>
                                 </div>
                                 <div>
                                   <label class="radio">
-                                    <input id="twoMile" type="radio" name="answer">
+                                    <input value="desc" type="radio" name="sortOrd">
+                                    Descend
+                                  </label>
+                                </div>
+                            </div>
+                          </div>
+
+                          <div>
+                              <div class="distance"><strong>Distance</strong></div>
+                              <div class="control">
+                                <div>
+                                  <label class="radio">
+                                    <input value="1" type="radio" name="mileage">
+                                    1 mile
+                                  </label>
+                                </div>
+                                <div>
+                                  <label class="radio">
+                                    <input value="2" type="radio" name="mileage">
                                     2 miles
                                   </label>
                                 </div>
                                 <div>
                                   <label class="radio">
-                                    <input id="threeMile" type="radio" name="answer">
+                                    <input value="3" type="radio" name="mileage">
                                     3 miles
+                                  </label>
+                                </div>
+                                <div>
+                                  <label class="radio">
+                                    <input value="5" type="radio" name="mileage">
+                                    5 miles
                                   </label>
                                 </div><br>
                               </div>
-                              
-                              <div class="price"><strong>Price</strong></div>
-                              <div class="control">
-                                <label class="radio">
-                                  <input id="range1" type="radio" name="answer">
-                                  $0 - $10
-                                </label>
-                                <div>
-                                  <label class="radio">
-                                    <input id="range2" type="radio" name="answer">
-                                    $10 - $20
-                                  </label>
-                                </div>
-                                <div>
-                                  <label class="radio">
-                                    <input id="range3" type="radio" name="answer">
-                                    $20 - $30
-                                  </label>
-                                </div>
-                                <div>
-                                  <label class="radio">
-                                    <input id="range4" type="radio" name="answer">
-                                    $30 - $40
-                                  </label>
-                                </div><br>
-                              </div> 
                           
                             <!--This is button should submit the above data-->
                             <button id="submitAddresses" class="button is-primary">Submit</button>
@@ -144,7 +128,34 @@
             </div>
     </div>
     </div>
-  
+  <div class="field">
+    <div class="price"><strong>Price Range</strong></div>
+                              <div class="control">
+                                <label class="radio">
+                                  <input value="1" type="radio" name="priceRng">
+                                  $
+                                </label>
+                                <div>
+                                  <label class="radio">
+                                    <input value="2" type="radio" name="priceRng">
+                                    $$
+                                  </label>
+                                </div>
+                                <div>
+                                  <label class="radio">
+                                    <input value="3" type="radio" name="priceRng">
+                                    $$$
+                                  </label>
+                                </div>
+                                <div>
+                                  <label class="radio">
+                                    <input value="4" type="radio" name="priceRng">
+                                    $$$$
+                                  </label>
+                                </div><br>
+                              </div> 
+                              <button id="filterRest" class="button">Filter</button>
+  </div>
     <div class="box">
       <div class="columns">
       
