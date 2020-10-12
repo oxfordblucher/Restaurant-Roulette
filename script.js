@@ -5,16 +5,18 @@ $(document).ready(function () {
     //On click should set variables for the input fields
     $("#submitAddresses").on("click", function () {
 
+        $(".restaurant-list").html("");
+
         let bingLoc = "";
         let streetOne = $("#streetOne").val();
         let cityOne = $("#cityOne").val();
         let stateOne = $("#stateOne").val();
-        let codeOne = $("#codeOne").val();
+
         let streetTwo = $("#streetTwo").val();
         let cityTwo = $("#cityTwo").val();
         let stateTwo = $("#stateTwo").val();
-        let codeTwo = $("#codeTwo").val();
 
+        let userQuery = $("#userQuery").val();
 
         var setting1 = {
             "async": true,
@@ -70,11 +72,35 @@ $(document).ready(function () {
                         return coord;
                     }).then(function (coord) {
                         console.log(coord);
-                        var foodUrl = "https://developers.zomato.com/api/v2.1/search?count=10&lat=" + coord.lat + "&lon=" + coord.lon + "&radius=3219";
+                        const distRBs = $("input[name = 'mileage']");
+                        let selectedMile;
+                        for (const distRB of distRBs) {
+                            if (distRB.checked) {
+                                selectedMile = distRB.value;
+                                break;
+                            }
+                        }
+                        var radius = parseFloat(selectedMile) * 1609;
+                        
+                        var sortFunc = $("#sortFunc").children("option:selected").val();
+
+                        const sortRBs = $("input[name = 'sortOrd']");
+                        let selectedOrd;
+                        for (const sortRB of sortRBs) {
+                            if (sortRB.checked) {
+                                selectedOrd = sortRB.value;
+                                break;
+                            }
+                        }
+
+                        var foodUrl = "https://developers.zomato.com/api/v2.1/search?q" + userQuery + "count=20&lat=" + coord.lat + "&lon=" + coord.lon + "&radius=" + radius + "&sort=" + sortFunc + "&order=" + selectedOrd;
+                        
+                        console.log(foodUrl);
+                        
                         $.ajax({
                             url: foodUrl,
                             headers: {
-                                'user-key': "0b0b28bbc4c8c280f62ef50d44784da7"
+                                'user-key': "0b0b28bbc4c8c280f62ef50d44784da7",
                             },
                             method: 'GET'
                         }).then(function (response) {
@@ -107,6 +133,9 @@ $(document).ready(function () {
                             });
 
                             for (let i = 0; i < response.restaurants.length; i++) {
+                                if (i === 10) {
+                                    break;
+                                }
                                 let restList = $(".restaurant-list");
                                 let result = response.restaurants[i];
 
