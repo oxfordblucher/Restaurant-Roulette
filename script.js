@@ -134,15 +134,33 @@ $(document).ready(function () {
                                 nuTile.append(restName, restAddr, restCuis);
                                 //Here we are adding a click listener so that whenever the nuTile div is clicked, it opens the modal.
                                 nuTile.click(function(){
-                                    $("")
-                                    $("#modal").attr("style", "display: block")
+                                    $(".modal-card-body").html("");
+                                    $("#modal").attr("style", "display: block");
                                     //text appending to the modal should go here!
                                     if(this.id === result.restaurant.name) {
                                         $(".modal-card-title").text(result.restaurant.name);
-
+                                        
                                         var restIMG = $("<img class ='restaurantIMG' alt='Featured Image'>");
                                         restIMG.attr("src", result.restaurant.featured_image);
-                                        $(".modal-card-body").append(restIMG);
+
+                                        var modalPrice = $("<div class='row is-full'>");
+                                        var priceRange = parseInt(result.restaurant.price_range)
+                                        modalPrice.text("Price Range: " + "$".repeat(priceRange));
+
+                                        var modalPhone = $("<div class='row is-full'>");
+                                        modalPhone.text("Phone number(s): " + result.restaurant.phone_numbers)
+
+                                        var modalTime = $("<div class='row is-full'>");
+                                        modalTime.text("Hours: " + result.restaurant.timings);
+
+                                        var modalRate = $("<div class='row is-full'>");
+                                        modalRate.text("Rating: " + result.restaurant.user_rating.aggregate_rating);
+                                        modalRate.append($("<br>"), "(A '0' usually denotes a lack of ratings.)")
+
+                                        var modalLink = $("<a target='_blank'>Zomato Page</a>");
+                                        modalLink.attr("href", result.restaurant.url);
+
+                                        $(".modal-card-body").append(restIMG, modalPrice, modalPhone, modalTime, modalRate, modalLink);
                                     }
                                     
                                 });
