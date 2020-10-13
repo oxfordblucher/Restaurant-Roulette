@@ -301,4 +301,23 @@ function test(setting1, setting2) {
 }
 
 
+    $("#filterRest").on("click", function() {
+        const priceRBs = $("input[name = 'priceRng']");
+        let selectedRng;
+        for (const priceRB of priceRBs) {
+            if (sortRB.checked) {
+                selectedRng = priceRB.value;
+                break;
+            }
+        }
+        for (let i = 0; i < zomatoCall.restaurants.length; i++) {
+            const filtRest = zomatoCall.restaurants[i];
+            if (filtRest.restaurant.price_range !== selectedRng) {
+                
+            }
+        }
+    })
+});
+
+
 
