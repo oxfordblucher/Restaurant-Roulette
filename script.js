@@ -407,9 +407,9 @@ function test(x, y) {
                                     var modalRate = $("<div class='row is-full'>");
                                     modalRate.text("Rating: " + zomatoCall[indexCall].restaurant.user_rating.aggregate_rating);
                                     modalRate.append($("<br>"), "(A '0' usually denotes a lack of ratings.)")
-
+                                    
                                     var modalLink = $("<a class='button is-primary is-medium is-fullwidth'target='_blank'>Let's Go!</a>");
-                                    modalLink.attr("href", zomatoCall[indexCall].restaurant.url);
+                                    modalLink.attr("href", result.restaurant.url);
 
                                     $(".modal-card-body").append(restIMG, modalPrice, modalPhone, modalTime, modalRate, modalLink)
                                 });
