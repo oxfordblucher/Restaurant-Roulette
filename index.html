@@ -33,13 +33,17 @@
 
         <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item">
+                <a id="navbarAbout" class="navbar-item">
                     About
                 </a>
+                 <a class="navbar-item" href="index.html" target="blank">Home</a>
             </div>
         </div>
     </nav>
 
+    <main id="main">
+
+    
     <h1>
         Meeting up with someone?
     </h1>
@@ -202,31 +206,36 @@
             Descend
         </label>
     </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
+    
+    
+    <div class="box">
 
 
+      <div class="columns">
+        <div class="column auto restaurant-list">
+          <!-- Restaurant list -->
+        </div>
+        <div class="column auto">
+          <!-- Map -->
+          <div id="myMap"></div>
+        </div>
+       
+      </div>
+    </div>
 
-
-    <!-- Restaurant list -->
-    <div class="column is-one-half restaurant-list">
-
-    </div>
-    <!-- Map -->
-    <div class="column is-one-half">
-        <div id="myMap"></div>
-    </div>
-    </div>
-    </div>
     </main>
-    <section id="aboutPage">
-
+    <section id="aboutPage" class="hero">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">
+            About UMEWE
+          </h1>
+          <p>We all need simplicity in our lives. That’s where UMEWE comes in! Whether you’re looking to meet a friend, family member, or even a date, UMEWE will find the midway point between two different locations and display a list of 10 restaurants within that radius. You can even further define your search by typing in a specific parameter such as “sushi,” and even sort by cost, distance or popularity.</p><br>
+          <p>After adding their inputs and clicking search, the user is presented with a map which displays the list of restaurants located halfway between the two locations. When the user selects one of the restaurant descriptions or “push pinned” map locations, they are shown a modal with a summary of the restaurant information. Hours, ratings and a price range are shown for a quick review. There is also a link to the respective restaurant on Zomato, which provides further detailed information including reviews, photos and a menu. </p><br>
+          <p>It's as simple as that!</p>
+        </div>
+      </div>
+      
     </section>
     <script
         src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[ApFZwBlF5C4sFUrPWvHt7DxQbosvOYl24WTQE-GGMHphkpiCCHm14tkZq0S8CvJZ]'

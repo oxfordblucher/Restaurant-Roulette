@@ -1,18 +1,6 @@
 html{
     max-width: 100%;
 }
-/* Restaurant Tile Styles */
-.tile {
-    background-color: #EEEEEC;
-    padding: 20px;
-    margin: 10px;
-    font-size: 16px;
-}
-/* Zomato Page Link Style on Modal */
-a {
-    color: #916CCF;
-  }
-
 
 body{
     background-image: url(./assets/background.png);
@@ -60,13 +48,18 @@ h1{
    
 }
 
-
-#dropdown {
-    margin-top: 15px;
-}
-
+/* Review Stars */
 .checked {
     color: orange;
+}
+
+/* Restaurant Tile Styles */
+.tile {
+    background-color: #EEEEEC;
+    padding: 20px;
+    margin: 10px;
+    font-size: 16px;
+    text-align: left; 
 }
 
 .restaurantName {
@@ -84,11 +77,16 @@ h1{
 /* Modal Styles */
 .modal-card-title {
     font-weight: bold;
+    text-align: left;
+    font-family: 'Merriweather Sans', sans-serif;
 }
 
 .info {
     margin-top: 10px;
     color: black;
+    text-align: left;
+    font-family: 'Merriweather Sans', sans-serif;
+    font-size: 16px;
 }
 
 .restaurantIMG {
@@ -97,10 +95,9 @@ h1{
 
 #rate {
     margin-top: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
     color: black;
+    text-align: left;
+    font-family: 'Merriweather Sans', sans-serif;
+    font-size: 16px;
 }
-
-
-
-  

@@ -418,6 +418,15 @@ function test(x, y) {
                             }
 
                         });
-                });
-            })}
-        )}
+                    });
+                })
+        });
+}
+
+
+    $( "#aboutPage" ).hide();
+    
+  $("#navbarAbout").on("click", function() {
+        $( "#main" ).hide();
+        $( "#aboutPage" ).show();
+    })
