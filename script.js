@@ -391,8 +391,14 @@ function test(x, y) {
                                     indexCall = parseInt(label) - 1;
                                     $(".modal-card-title").text(zomatoCall[indexCall].restaurant.name);
 
-                                    var restIMG = $("<img class ='restaurantIMG' alt='Featured Image'>");
-                                    restIMG.attr("src", zomatoCall[indexCall].restaurant.featured_image);
+                                    var restIMG = $("<img class ='restaurantIMG' alt='Featured Image' style='width: 100%;'>");
+                                    if(zomatoCall[indexCall].restaurant.featured_image){
+                                        restIMG.attr("src", zomatoCall[indexCall].restaurant.featured_image);
+                                    } else{
+                                        //------------------------------------------------------------------------
+                                        restIMG.attr("src", "assets/placeholder.jpg");
+                                        //
+                                    }
 
                                     var modalPrice = $("<div class='row is-full'>");
                                     var priceRange = parseInt(zomatoCall[indexCall].restaurant.price_range)
