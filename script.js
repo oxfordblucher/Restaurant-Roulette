@@ -73,7 +73,6 @@ var zomatoCall = [];
 var result = "";
 var filterCall = [];
 
-
 function populateList(array) {
 
     $(".restaurant-list").html("");
@@ -146,13 +145,6 @@ function populateList(array) {
 
 //On click should set variables for the input fields
 $("#submitAddresses").on("click", function () {
-
-    let bingLoc = "";
-
-    let userQuery = $("#userQuery").val();
-
-
-
     var setting1 = {
         "async": true,
         "crossDomain": true,
@@ -163,7 +155,7 @@ $("#submitAddresses").on("click", function () {
             "x-rapidapi-key": "d5a9e5282bmshadfe616217dbda8p1fd537jsn689affc185cc"
         }
     }
-
+    
     var setting2 = {
         "async": true,
         "crossDomain": true,
@@ -174,16 +166,127 @@ $("#submitAddresses").on("click", function () {
             "x-rapidapi-key": "d5a9e5282bmshadfe616217dbda8p1fd537jsn689affc185cc"
         }
     }
+        
+    let bingLoc = "";
+    let userQuery = $("#userQuery").val();
     test(setting1, setting2);
-
 });
-function test(setting1, setting2) {
-    $.ajax(setting1)
+
+$("#randomSpot").on("click", function () {
+    var setting1 = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://forward-reverse-geocoding.p.rapidapi.com/v1/forward?polygon_geojson=0&state=" + stateOne + "&limit=1&street=" + streetOne + "&polygon_svg=0&polygon_kml=0&namedetails=0&accept-language=en&city=" + cityOne + "&addressdetails=1&polygon_threshold=0.0&polygon_text=0&bounded=0&format=json",
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "forward-reverse-geocoding.p.rapidapi.com",
+            "x-rapidapi-key": "d5a9e5282bmshadfe616217dbda8p1fd537jsn689affc185cc"
+        }
+    }
+    
+    var setting2 = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://forward-reverse-geocoding.p.rapidapi.com/v1/forward?polygon_geojson=0&state=" + stateTwo + "&limit=1&street=" + streetTwo + "&polygon_svg=0&polygon_kml=0&namedetails=0&accept-language=en&city=" + cityTwo + "&addressdetails=1&polygon_threshold=0.0&polygon_text=0&bounded=0&format=json",
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "forward-reverse-geocoding.p.rapidapi.com",
+            "x-rapidapi-key": "d5a9e5282bmshadfe616217dbda8p1fd537jsn689affc185cc"
+        }
+    }
+    surprise(setting1, setting2);
+});
+
+function surprise(x, y) {
+    $.ajax(x)
         .then(function (response) {
             var temp = { lat: response[0].lat, lon: response[0].lon };
             return temp
         }).then(function (temp) {
-            $.ajax(setting2)
+            $.ajax(y)
+                .then(function (response2) {
+                    var temp2 = { lat: response2[0].lat, lon: response2[0].lon };
+                    var lat1 = parseFloat(temp.lat);
+                    var lat2 = parseFloat(temp2.lat);
+                    var lon1 = parseFloat(temp.lon);
+                    var lon2 = parseFloat(temp2.lon);
+                    var avgLat = (lat1 + lat2) / 2;
+                    var avgLon = (lon1 + lon2) / 2;
+                    var coord = {
+                        lat: avgLat,
+                        lon: avgLon
+                    };
+                    return coord;
+                }).then(function (coord) {
+                    const distRBs = $("input[name = 'mileage']");
+                    let selectedMile;
+                    for (const distRB of distRBs) {
+                        if (distRB.checked) {
+                            selectedMile = distRB.value;
+                            break;
+                        }
+                    }
+
+                    const sortRBs = $("input[name = 'sortOrd']");
+                    let selectedOrd;
+                    for (const sortRB of sortRBs) {
+                        if (sortRB.checked) {
+                            selectedOrd = sortRB.value;
+                            break;
+                        }
+                    }
+
+                    var sortFunc = $("#sortFunc").children("option:selected").val();
+
+                    var radius = parseFloat(selectedMile) * 1609;
+
+                    var userQuery = $("#userQuery").val();
+
+                    var foodUrl = "https://developers.zomato.com/api/v2.1/search?q=" + userQuery + "&count=20&lat=" + coord.lat + "&lon=" + coord.lon + "&radius=" + radius + "&sort=" + sortFunc + "&order=" + selectedOrd;
+                        
+                    console.log(foodUrl);
+
+                    $.ajax({
+                        url: foodUrl,
+                        headers: {
+                            'user-key': "0b0b28bbc4c8c280f62ef50d44784da7",
+                        },
+                        method: 'GET'
+                    }).then(function (response) {
+                        console.log(response);
+                        zomatoCall = response.restaurants;
+
+                    const priceRBs = $("input[name = 'priceRng']");
+                    let selectedRng;
+
+                    for (const priceRB of priceRBs) {
+                        if (priceRB.checked) {
+                            selectedRng = parseInt(priceRB.value);
+                            for (let i = 0; i < zomatoCall.length; i++) {
+                                const result = zomatoCall[i];
+                                let priceRng = parseInt(result.restaurant.price_range);
+                                if (priceRng === selectedRng) {
+                                    filterCall.push(result);
+                                }
+                            }
+                            zomatoCall = filterCall;
+                        }
+                    }
+                    
+                    let rndmSelect = zomatoCall[Math.floor(Math.random() * zomatoCall.length)];
+                    console.log(rndmSelect);
+                    window.open(rndmSelect.restaurant.url);
+                })})
+        })
+    }
+
+function test(x, y) {
+    $.ajax(x)
+        .then(function (response) {
+            var temp = { lat: response[0].lat, lon: response[0].lon };
+            return temp
+        }).then(function (temp) {
+            $.ajax(y)
                 .then(function (response2) {
                     console.log(response2)
                     //action1
@@ -243,11 +346,25 @@ function test(setting1, setting2) {
                         method: 'GET'
                     }).then(function (response) {
                         console.log(response);
-                        zomatoCall = response.restaurants;                           
+                        zomatoCall = response.restaurants;
+
+                    const priceRBs = $("input[name = 'priceRng']");
+                    let selectedRng;
+                    for (const priceRB of priceRBs) {
+                        if (priceRB.checked) {
+                            selectedRng = parseInt(priceRB.value);
+                            for (let i = 0; i < zomatoCall.length; i++) {
+                                const result = zomatoCall[i];
+                                let priceRng = parseInt(result.restaurant.price_range);
+                                if (priceRng === selectedRng) {
+                                    filterCall.push(result);
+                                }
+                            }
+                            zomatoCall = filterCall;
+                        }
                         populateList(zomatoCall);
-                        });
-                    });
-                    console.log(bingLoc);
+                    }}).then(function() {
+
                         //Creates a map
                         var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
                             credentials: 'ApFZwBlF5C4sFUrPWvHt7DxQbosvOYl24WTQE-GGMHphkpiCCHm14tkZq0S8CvJZ'
@@ -263,7 +380,6 @@ function test(setting1, setting2) {
                         //Create 10 pushpins on the map at the 10 locations, listed in their array order
                         Microsoft.Maps.loadModule('Microsoft.Maps.SpatialMath', function () {
                             for (i = 0; i < 10; i++) {
-                                console.log(zomatoCall)
                                 result = zomatoCall[i];
                                 let label = (i + 1).toString();
                                 let estabLoc = new Microsoft.Maps.Location(result.restaurant.location.latitude, result.restaurant.location.longitude);
@@ -303,19 +419,5 @@ function test(setting1, setting2) {
 
                         });
                 });
-            }
-
-    $("#filterRest").on("click", function() {
-        var priceFilter = $("#priceFilter").children("option:selected").val();
-        console.log(priceFilter);
-
-        for (let i = 0; i < zomatoCall.length; i++) {
-            let result = zomatoCall[i];
-            let priceRng = parseInt(result.restaurant.price_range);
-            if (priceRng === priceFilter) {
-                filterCall.push(result);
-            }
-        }
-        console.log(filterCall);
-        populateList(filterCall);
-    })
+            })}
+        )}
