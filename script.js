@@ -201,8 +201,15 @@ function test(setting1, setting2) {
                                 if (this.id === result.restaurant.name) {
                                     $(".modal-card-title").text(result.restaurant.name);
 
-                                    var restIMG = $("<img class ='restaurantIMG' alt='Featured Image'>");
-                                    restIMG.attr("src", result.restaurant.featured_image);
+                                    var restIMG = $("<img class ='restaurantIMG' alt='Featured Image' style='width: 100%;'>");
+                                    if(result.restaurant.featured_image){
+                                        restIMG.attr("src", result.restaurant.featured_image);
+                                    } else{
+                                        //------------------------------------------------------------------------
+                                        restIMG.attr("src", "assets/placeholder.jpg");
+                                        //
+                                    }
+                                    
 
                                     var modalPrice = $("<div class='row is-full info'>");
                                     var priceRange = parseInt(result.restaurant.price_range)
@@ -218,7 +225,7 @@ function test(setting1, setting2) {
                                     modalRate.text("Rating: " + result.restaurant.user_rating.aggregate_rating);
                                     modalRate.append($("<br>"), "(A '0' usually denotes a lack of ratings.)")
 
-                                    var modalLink = $("<a target='_blank'>Zomato Page</a>");
+                                    var modalLink = $("<a class='button is-primary is-medium is-fullwidth'target='_blank'>Let's Go!</a>");
                                     modalLink.attr("href", result.restaurant.url);
 
                                     $(".modal-card-body").append(restIMG, modalPrice, modalPhone, modalTime, modalRate, modalLink);
@@ -277,7 +284,7 @@ function test(setting1, setting2) {
                                     modalRate.text("Rating: " + zomatoCall.restaurants[indexCall].restaurant.user_rating.aggregate_rating);
                                     modalRate.append($("<br>"), "(A '0' usually denotes a lack of ratings.)")
 
-                                    var modalLink = $("<a target='_blank'>Zomato Page</a>");
+                                    var modalLink = $("<a class='button is-primary is-medium is-fullwidth'target='_blank'>Let's Go!</a>");
                                     modalLink.attr("href", zomatoCall.restaurants[indexCall].restaurant.url);
 
                                     $(".modal-card-body").append(restIMG, modalPrice, modalPhone, modalTime, modalRate, modalLink)
