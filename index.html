@@ -133,11 +133,11 @@
                             <div class="control is-expanded">
                                 <label class="label">Sort By</label>
                                 <div class="select is-fullwidth">
-                                    <select name="country">
+                                    <select id="sortFunc">
                                         <option></option>
-                                        <option id="cost">Cost</option>
-                                        <option id="distance">Distance</option>
-                                        <option id="popularity">Popularity</option>
+                                        <option value="cost">Cost</option>
+                                        <option value="real_distance">Distance</option>
+                                        <option value="rating">Popularity</option>
                                     </select>
                                 </div>
                             </div>
@@ -147,6 +147,7 @@
                 <hr />
                 <div id="Button">
                     <button id="submitAddresses" class="button is-success">Meet Up!</button>
+                    <button id="randomSpot" class="button is-success">Surprise Us!</button>
                 </div>
             </div>
 
