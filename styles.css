@@ -1,13 +1,68 @@
-#dropdown {
-    margin-top: 15px;
+html{
+    max-width: 100%;
 }
-
 /* Restaurant Tile Styles */
 .tile {
     background-color: #EEEEEC;
     padding: 20px;
     margin: 10px;
     font-size: 16px;
+}
+/* Zomato Page Link Style on Modal */
+a {
+    color: #916CCF;
+  }
+
+
+body{
+    background-image: url(./assets/background.png);
+    background-repeat: no-repeat;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-size: 150%;
+    text-align: center;
+}
+
+.navbar{
+    background-color: transparent;
+}
+
+h1{
+    min-width: 66%;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    font-size: 72px;
+}
+
+#top-text{
+    font-size: 25px;
+    text-align: center;
+    margin: 20px;
+   
+}
+
+#input{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+
+#field-1{
+    width: 66%;
+    min-width: 66%;
+}
+
+#button{
+    text-align: center;
+}
+
+#sort{
+    text-align: center;
+   
+}
+
+
+#dropdown {
+    margin-top: 15px;
 }
 
 .checked {
@@ -46,7 +101,6 @@
     color: black;
 }
 
-/* Zomato Page Link Style on Modal */
-a {
-    color: #916CCF;
-  }
+
+
+  
