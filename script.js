@@ -318,6 +318,14 @@ function test(setting1, setting2) {
         }
     })
 
+    
+
+    $( "#aboutPage" ).hide();
+    
+  $("#navbarAbout").on("click", function() {
+        $( "#main" ).hide();
+        $( "#aboutPage" ).show();
+    })
 
 
 
