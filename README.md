@@ -23,4 +23,4 @@ Bing Maps, Zomato, Geocoding
 
 This project was built for UPenn LPS Coding Bootcamp 2020.
 
-[Claire Vita]( https://github.com/clairevita) [Hiu Chan]( https://github.com/oxfordblucher) [Lamott Ebron]( https://github.com/lamottebron1) [Alexandra Hionis ]( https://github.com/Alexandra-Hionis)
+[Claire Vita]( https://github.com/clairevita), [Hiu Chan]( https://github.com/oxfordblucher), [Lamott Ebron]( https://github.com/lamottebron1), [Alexandra Hionis ]( https://github.com/Alexandra-Hionis)
