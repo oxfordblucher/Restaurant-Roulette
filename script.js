@@ -244,11 +244,10 @@ function test(setting1, setting2) {
                     }).then(function (response) {
                         console.log(response);
                         zomatoCall = response.restaurants;                           
-                        console.log(zomatoCall);
                         populateList(zomatoCall);
                         });
                     });
-
+                    console.log(bingLoc);
                         //Creates a map
                         var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
                             credentials: 'ApFZwBlF5C4sFUrPWvHt7DxQbosvOYl24WTQE-GGMHphkpiCCHm14tkZq0S8CvJZ'
@@ -264,7 +263,7 @@ function test(setting1, setting2) {
                         //Create 10 pushpins on the map at the 10 locations, listed in their array order
                         Microsoft.Maps.loadModule('Microsoft.Maps.SpatialMath', function () {
                             for (i = 0; i < 10; i++) {
-                                console.log("Hello")
+                                console.log(zomatoCall)
                                 result = zomatoCall[i];
                                 let label = (i + 1).toString();
                                 let estabLoc = new Microsoft.Maps.Location(result.restaurant.location.latitude, result.restaurant.location.longitude);
@@ -302,7 +301,7 @@ function test(setting1, setting2) {
 
                             }
 
-                        })
+                        });
                 });
             }
 
@@ -313,10 +312,8 @@ function test(setting1, setting2) {
         for (let i = 0; i < zomatoCall.length; i++) {
             let result = zomatoCall[i];
             let priceRng = parseInt(result.restaurant.price_range);
-            if (priceRng !== priceFilter) {
-                var filterIndex = zomatoCall.indexOf(result);
-                console.log(filterIndex);
-                var filterCall = zomatoCall.splice(filterIndex);
+            if (priceRng === priceFilter) {
+                filterCall.push(result);
             }
         }
         console.log(filterCall);
