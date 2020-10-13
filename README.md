@@ -1,6 +1,6 @@
 Add Link!!
 
-#UMEWE
+# UMEWE
 
 We all need simplicity in our lives. That’s where UMEWE comes in! Whether you’re looking to meet a friend, family member, or even a date, UMEWE will find the midway point between two different locations and display a list of 10 restaurants within that radius. You can even further define your search by typing in a specific parameter such as “sushi,” and even sort by cost, distance or popularity. 
 
@@ -8,7 +8,7 @@ After adding their inputs and clicking search, the user is presented with a map 
 
 It’s as simple as that. 
 
-#Under the Hood
+# Under the Hood
 
 This website is run by HTML, CSS, Javascript. With the help of CSS framework, Bulma, UMEWE presents a polished and simple user interface.  It is responsive to any screen size and it is easy to use. Columns, tiles, dropdowns, input forms and modals are just a few of the framework’s components and elements integrated. Bulma does not include any JavaScript interaction, so we had to implement that ourselves.
 
@@ -19,7 +19,7 @@ This website is run by HTML, CSS, Javascript. With the help of CSS framework, Bu
 
 Bing Maps, Zomato
 
-#Contributors
+# Contributors
 
 This project was built for UPenn LPS Coding Bootcamp 2020.
 
