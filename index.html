@@ -115,37 +115,33 @@
             </div>
     </div>
     </div>
-  <div class="field">
-    <div class="price"><strong>Price Range</strong></div>
-                              <div class="control">
-                                <label class="radio">
-                                  <input value="1" type="radio" name="priceRng">
-                                  $
-                                </label>
-                                <div>
-                                  <label class="radio">
-                                    <input value="2" type="radio" name="priceRng">
-                                    $$
-                                  </label>
-                                </div>
-                                <div>
-                                  <label class="radio">
-                                    <input value="3" type="radio" name="priceRng">
-                                    $$$
-                                  </label>
-                                </div>
-                                <div>
-                                  <label class="radio">
-                                    <input value="4" type="radio" name="priceRng">
-                                    $$$$
-                                  </label>
-                                </div><br>
-                              </div> 
-                              <button id="filterRest" class="button">Filter</button>
-  </div>
+  
     <div class="box">
+    
+  
+
       <div class="columns">
-      
+        <div id="dropdown">
+        <div class="field">
+          <label class="label"></label>
+          <div class="control">
+            <div class="select">
+              <select id="sortFunc">
+                <option value="">Price ($)</option>
+                <option value="cost">$</option>
+                <option value="real_distance">$$</option>
+                <option value="rating">$$$</option>
+                <option value="rating">$$$$</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      <div>
+          <button id="filterRest" class="button">Filter</button><br>
+      </div>
+      </div>
+  
+    
         <!-- Restaurant list -->
       <div class="column is-one-half restaurant-list">
         
@@ -155,7 +151,6 @@
             <div id="myMap"></div>
         </div>
         </div>
-      </div>
 
       <script src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[ApFZwBlF5C4sFUrPWvHt7DxQbosvOYl24WTQE-GGMHphkpiCCHm14tkZq0S8CvJZ]' async defer></script>
       <script src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
