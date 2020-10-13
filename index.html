@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,11 +16,11 @@
       <div class="modal" id="modal">
         <div class="modal-background" id="closeModalbg"></div>
         <div class="modal-card">
-          <header class="modal-card-head">
+          <header id="modalHead" class="modal-card-head">
             <p class="modal-card-title">Modal title</p>
             <button class="delete" aria-label="close" id="closeModalx"></button>
           </header>
-          <section class="modal-card-body">
+          <section id="modalBody" class="modal-card-body">
             <!-- Content ... -->
           </section>
           <footer class="modal-card-foot">
@@ -29,34 +31,21 @@
   
     <div class="box">
         <div class="columns">
-            <div class="column"></div>
             <div class="column is-four-fifths">
                 <!--This is the Address 1 field-->
                 <div class="field">
                     <label class="label">Address 1</label>
                     <!--This is where the Address 1 value will be located-->
-                    <div class="control has-icons-left has-icons-right">
+                    <div id="autoOne" class="control has-icons-left has-icons-right">
                         <input id="streetOne" class="input is-primary" type="text" placeholder="Street address">
                     </div>
-                    <div class="control has-icons-left has-icons-right">
-                        <input id="cityOne" class="input is-primary" type="text" placeholder="City">
-                    </div>
-                    <div class="control has-icons-left has-icons-right">
-                        <input id="stateOne" class="input is-primary" type="text" placeholder="State">
-                    </div>
-                </div>
+                  </div>
                 <!--This is the Address 2 field-->
                 <div class="field">
                     <label class="label">Address 2</label>
                     <!--This is where the Address 2 value will be located-->
-                    <div class="control has-icons-left has-icons-right">
+                    <div id= "autoTwo" class="control has-icons-left has-icons-right">
                         <input id="streetTwo" class="input is-primary" type="text" placeholder="Street address">
-                    </div>
-                    <div class="control has-icons-left has-icons-right">
-                        <input id="cityTwo" class="input is-primary" type="text" placeholder="City">
-                    </div>
-                    <div class="control has-icons-left has-icons-right">
-                        <input id="stateTwo" class="input is-primary" type="text" placeholder="State">
                     </div>
                   </div>
                         <div class="field">
@@ -128,37 +117,33 @@
             </div>
     </div>
     </div>
-  <div class="field">
-    <div class="price"><strong>Price Range</strong></div>
-                              <div class="control">
-                                <label class="radio">
-                                  <input value="1" type="radio" name="priceRng">
-                                  $
-                                </label>
-                                <div>
-                                  <label class="radio">
-                                    <input value="2" type="radio" name="priceRng">
-                                    $$
-                                  </label>
-                                </div>
-                                <div>
-                                  <label class="radio">
-                                    <input value="3" type="radio" name="priceRng">
-                                    $$$
-                                  </label>
-                                </div>
-                                <div>
-                                  <label class="radio">
-                                    <input value="4" type="radio" name="priceRng">
-                                    $$$$
-                                  </label>
-                                </div><br>
-                              </div> 
-                              <button id="filterRest" class="button">Filter</button>
-  </div>
+  
     <div class="box">
+    
+
+
       <div class="columns">
-      
+        <div id="dropdown">
+        <div class="field">
+          <label class="label"></label>
+          <div class="control">
+            <div class="select">
+              <select id="priceFilter">
+                <option value="">Price ($)</option>
+                <option value="1">$</option>
+                <option value="2">$$</option>
+                <option value="3">$$$</option>
+                <option value="4">$$$$</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      <div>
+          <button id="filterRest" class="button">Filter</button><br>
+      </div>
+      </div>
+  
+    
         <!-- Restaurant list -->
       <div class="column is-one-half restaurant-list">
         
@@ -168,10 +153,12 @@
             <div id="myMap"></div>
         </div>
         </div>
-      </div>
+
       <script src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[ApFZwBlF5C4sFUrPWvHt7DxQbosvOYl24WTQE-GGMHphkpiCCHm14tkZq0S8CvJZ]' async defer></script>
+      <script src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
       <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
       <script src="script.js"></script>
+
   
 
   </body>

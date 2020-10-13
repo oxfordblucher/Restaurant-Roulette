@@ -1,9 +1,60 @@
+//These variables will be populated by the Bing API and then used by the Zomato API
+let streetOne = "";
+let cityOne = "";
+let stateOne = "";
+let streetTwo = "";
+let cityTwo = "";
+let stateTwo = "";
+//These variables are to control whether the first form has been filled or not. Otherwise the second form will overwrite the first
+let firstFill = false;
+function GetMap() {
+    Microsoft.Maps.loadModule('Microsoft.Maps.AutoSuggest', {
+        callback: function () {
+            var manager = new Microsoft.Maps.AutosuggestManager({
+                placeSuggestions: true
+            });
+            manager.attachAutosuggest('#streetTwo', '#autoTwo', selectedSuggestion);
+        },
+        errorCallback: function(msg){
+            console.log(msg);
+        },
+        credentials: 'ApFZwBlF5C4sFUrPWvHt7DxQbosvOYl24WTQE-GGMHphkpiCCHm14tkZq0S8CvJZ'
+        
+    });
+    Microsoft.Maps.loadModule('Microsoft.Maps.AutoSuggest', {
+        callback: function () {
+            var manager = new Microsoft.Maps.AutosuggestManager({
+                placeSuggestions: true
+            });
+            manager.attachAutosuggest('#streetOne', '#autoOne', selectedSuggestion);
+        },
+        errorCallback: function(msg){
+            console.log(msg);
+        },
+        credentials: 'ApFZwBlF5C4sFUrPWvHt7DxQbosvOYl24WTQE-GGMHphkpiCCHm14tkZq0S8CvJZ'
+        
+    });   
+}
+function selectedSuggestion(result) {
+    if(!firstFill){
+        streetOne = result.address.addressLine || '';
+        cityOne = result.address.locality || '';
+        stateOne = result.address.adminDistrict || '';
+        document.getElementById('streetOne').value = result.formattedSuggestion;
+        firstFill = true;
+    }else{
+        streetTwo = result.address.addressLine || '';
+        cityTwo = result.address.locality || '';
+        stateTwo = result.address.adminDistrict || '';
+        document.getElementById('streetTwo').value = result.formattedSuggestion;
+    }
 
-// A $( document ).ready() block.
-$(document).ready(function () {
+
+}
 
     var zomatoCall = "";
     var result = "";
+    var filterCall = "";
 
     //On click should set variables for the input fields
     $("#submitAddresses").on("click", function () {
@@ -11,15 +62,10 @@ $(document).ready(function () {
         $(".restaurant-list").html("");
 
         let bingLoc = "";
-        let streetOne = $("#streetOne").val();
-        let cityOne = $("#cityOne").val();
-        let stateOne = $("#stateOne").val();
-
-        let streetTwo = $("#streetTwo").val();
-        let cityTwo = $("#cityTwo").val();
-        let stateTwo = $("#stateTwo").val();
 
         let userQuery = $("#userQuery").val();
+        
+    
 
         var setting1 = {
             "async": true,
@@ -65,7 +111,7 @@ $(document).ready(function () {
                         var avgLat = (lat1 + lat2) / 2;
                         var avgLon = (lon1 + lon2) / 2;
                         console.log(avgLat, avgLon);
-                        //Bing requires funky formatting, so I've included it here.
+                        //Bing requires specific location formatting, this translates our lat and lon into Bing's requirements.
                         bingLoc = new Microsoft.Maps.Location(avgLat, avgLon);
 
                         var coord = {
@@ -109,15 +155,18 @@ $(document).ready(function () {
                             },
                             method: 'GET'
                         }).then(function (response) {
-                            zomatoCall = response;                           
+                            zomatoCall = response.restaurants;                           
                             console.log(zomatoCall);
+                            populateList(zomatoCall);
 
-                            for (let i = 0; i < zomatoCall.restaurants.length; i++) {
+                            function populateList(zomatoCall) {
+
+                            for (let i = 0; i < zomatoCall.length; i++) {
                                 if (i === 10) {
                                     break;
                                 }
                                 let restList = $(".restaurant-list");
-                                let result = zomatoCall.restaurants[i];
+                                let result = zomatoCall[i];
 
                                 //This creates the div tile 
                                 var nuTile = $("<div class ='tile rows' id='modal-button' data-target='#modal'>");
@@ -128,7 +177,7 @@ $(document).ready(function () {
                                 var restCuis = $("<div class='restaurantCuisine row is-full'>");
 
                                 restList.append(nuTile);
-                                restName.text(result.restaurant.name);
+                                restName.text((i+1) +") " + result.restaurant.name);
                                 restAddr.text(result.restaurant.location.address);
                                 restCuis.text(result.restaurant.cuisines);
                                 nuTile.append(restName, restAddr, restCuis);
@@ -143,17 +192,17 @@ $(document).ready(function () {
                                         var restIMG = $("<img class ='restaurantIMG' alt='Featured Image'>");
                                         restIMG.attr("src", result.restaurant.featured_image);
 
-                                        var modalPrice = $("<div class='row is-full'>");
+                                        var modalPrice = $("<div class='row is-full info'>");
                                         var priceRange = parseInt(result.restaurant.price_range)
                                         modalPrice.text("Price Range: " + "$".repeat(priceRange));
 
-                                        var modalPhone = $("<div class='row is-full'>");
+                                        var modalPhone = $("<div class='row is-full info'>");
                                         modalPhone.text("Phone number(s): " + result.restaurant.phone_numbers)
 
-                                        var modalTime = $("<div class='row is-full'>");
+                                        var modalTime = $("<div class='row is-full info'>");
                                         modalTime.text("Hours: " + result.restaurant.timings);
 
-                                        var modalRate = $("<div class='row is-full'>");
+                                        var modalRate = $("<div id='rate' class='row is-full'>");
                                         modalRate.text("Rating: " + result.restaurant.user_rating.aggregate_rating);
                                         modalRate.append($("<br>"), "(A '0' usually denotes a lack of ratings.)")
 
@@ -166,10 +215,13 @@ $(document).ready(function () {
                                 });
 
                                 $("#closeModalbg, #closeModalx").click(function(){
-                                    $("#modal").attr("style", "display: none")
+                                    $("#modal").attr("style", "display: none");
+
                                 })
 
-                            }
+                               
+
+                            }}
                             //Creates a map
                             var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
                                 credentials: 'ApFZwBlF5C4sFUrPWvHt7DxQbosvOYl24WTQE-GGMHphkpiCCHm14tkZq0S8CvJZ'
@@ -189,35 +241,56 @@ $(document).ready(function () {
                                     let label = (i+1).toString();
                                     let estabLoc = new Microsoft.Maps.Location(result.restaurant.location.latitude, result.restaurant.location.longitude);
                                     var pushpin = new Microsoft.Maps.Pushpin(estabLoc, { text: label, title: result.restaurant.name, subTitle: result.restaurant.cuisines, enableHoverStyle: true});
-                                    Microsoft.Maps.Events.addHandler(pushpin, 'click', function () {  $("#modal").attr("style", "display: block")  
+                                    Microsoft.Maps.Events.addHandler(pushpin, 'click', function () {  
+                                    $(".modal-card-body").html("");
+                                    $("#modal").attr("style", "display: block");
+                                    indexCall = parseInt(label) - 1;
+                                    $(".modal-card-title").text( zomatoCall.restaurants[indexCall].restaurant.name);
+                                            
+                                    var restIMG = $("<img class ='restaurantIMG' alt='Featured Image'>");
+                                    restIMG.attr("src",  zomatoCall.restaurants[indexCall].restaurant.featured_image);
+                                    
+                                    var modalPrice = $("<div class='row is-full'>");
+                                    var priceRange = parseInt( zomatoCall.restaurants[indexCall].restaurant.price_range)
+                                    modalPrice.text("Price Range: " + "$".repeat(priceRange));
+
+                                    var modalPhone = $("<div class='row is-full'>");
+                                    modalPhone.text("Phone number(s): " +  zomatoCall.restaurants[indexCall].restaurant.phone_numbers)
+
+                                    var modalTime = $("<div class='row is-full'>");
+                                    modalTime.text("Hours: " +  zomatoCall.restaurants[indexCall].restaurant.timings);
+
+                                    var modalRate = $("<div class='row is-full'>");
+                                    modalRate.text("Rating: " +  zomatoCall.restaurants[indexCall].restaurant.user_rating.aggregate_rating);
+                                    modalRate.append($("<br>"), "(A '0' usually denotes a lack of ratings.)")
+
+                                    var modalLink = $("<a target='_blank'>Zomato Page</a>");
+                                    modalLink.attr("href",  zomatoCall.restaurants[indexCall].restaurant.url);
+
+                                    $(".modal-card-body").append(restIMG, modalPrice, modalPhone, modalTime, modalRate, modalLink)
                                     }); 
                                     map.entities.push(pushpin);
+
                                 }
+
                             });
 
-                                
-
-
-                        })
+                        });
                     })
-            })
+            });
     }
     $("#filterRest").on("click", function() {
-        const priceRBs = $("input[name = 'priceRng']");
-        let selectedRng;
-        for (const priceRB of priceRBs) {
-            if (sortRB.checked) {
-                selectedRng = priceRB.value;
-                break;
+        var priceFilter = $("#priceFilter").children("option:selected").val();
+
+        for (let i = 0; i < zomatoCall.length; i++) {
+            let result = zomatoCall[i];
+            if (result.restaurant.price_range === priceFilter) {
+                filterCall.push(result);
             }
         }
-        for (let i = 0; i < zomatoCall.restaurants.length; i++) {
-            const filtRest = zomatoCall.restaurants[i];
-            if (filtRest.restaurant.price_range !== selectedRng) {
-                
-            }
-        }
+
+        populateList(filterCall);
     })
-});
+
 
 
