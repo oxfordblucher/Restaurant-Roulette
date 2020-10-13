@@ -317,7 +317,7 @@ function test(setting1, setting2) {
             }
         }
     })
-});
+
 
 
 
