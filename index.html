@@ -1,170 +1,241 @@
-<!DOCTYPE html>
-<html lang="en">
+
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Working Title</title>
+    
+    <title>UMEWE</title>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <!-- Font Awesome Icon Library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-     <!-- CSS -->
-     <link rel="stylesheet" href="styles.css">
-  </head>
-  
-  <body>
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <!--Google font-->
+    <link href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="Navbar">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="./">
+                <img src="./assets/logo 1.png" width="100" height="28">
+            </a>
+
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+                data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item">
+                    About
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <h1>
+        Meeting up with someone?
+    </h1>
+
+
+    <div id="top-text">
+        <p>
+            We'll help you find a meeting destination in an area between you and the other party.
+        </p>
+    </div>
     <!-- Modal Start-->
-      <div class="modal" id="modal">
+    <div class="modal" id="modal">
         <div class="modal-background" id="closeModalbg"></div>
         <div class="modal-card">
-          <header id="modalHead" class="modal-card-head">
-            <p class="modal-card-title">Modal title</p>
-            <button class="delete" aria-label="close" id="closeModalx"></button>
-          </header>
-          <section id="modalBody" class="modal-card-body">
-            <!-- Content ... -->
-          </section>
-          <footer class="modal-card-foot">
-          </footer>
+            <header id="modalHead" class="modal-card-head">
+                <p class="modal-card-title">Modal title</p>
+                <button class="delete" aria-label="close" id="closeModalx"></button>
+            </header>
+            <section id="modalBody" class="modal-card-body">
+                <!-- Content ... -->
+            </section>
+            <footer class="modal-card-foot">
+            </footer>
         </div>
-      </div>
-  <!--Modal End-->
-  <main id="mainPage">
-    <div class="box">
-        <div class="columns">
-            <div class="column is-four-fifths">
-                <!--This is the Address 1 field-->
-                <div class="field">
-                    <label class="label">Address 1</label>
-                    <!--This is where the Address 1 value will be located-->
-                    <div id="autoOne" class="control has-icons-left has-icons-right">
-                        <input id="streetOne" class="input is-primary" type="text" placeholder="Street address">
-                    </div>
-                  </div>
-                <!--This is the Address 2 field-->
-                <div class="field">
-                    <label class="label">Address 2</label>
-                    <!--This is where the Address 2 value will be located-->
-                    <div id= "autoTwo" class="control has-icons-left has-icons-right">
-                        <input id="streetTwo" class="input is-primary" type="text" placeholder="Street address">
-                    </div>
-                  </div>
-                        <div class="field">
-                          <label class="label">Query</label>                          
-                        <div class="control has-icons-left has-icons-right">
-                          <input id="userQuery" class="input is-primary" type="text" placeholder="Keyword search">
-                        </div>
-                      </div>
-                          <div class="field">
-                            <label class="label">Sort By</label>
-                            <div class="control">
-                              <div class="select is-fullwidth">
-                                <select id="sortFunc">
-                                  <option value=""></option>
-                                  <option value="cost">Cost</option>
-                                  <option value="real_distance">Distance</option>
-                                  <option value="rating">Popularity</option>
-                                </select>
-                              </div>
-                                <div>
-                                  <label class="radio">
-                                    <input value="asc" type="radio" name="sortOrd">
-                                    Ascend
-                                  </label>
-                                </div>
-                                <div>
-                                  <label class="radio">
-                                    <input value="desc" type="radio" name="sortOrd">
-                                    Descend
-                                  </label>
-                                </div>
-                            </div>
-                          </div>
-
-                          <div>
-                              <div class="distance"><strong>Distance</strong></div>
-                              <div class="control">
-                                <div>
-                                  <label class="radio">
-                                    <input value="1" type="radio" name="mileage">
-                                    1 mile
-                                  </label>
-                                </div>
-                                <div>
-                                  <label class="radio">
-                                    <input value="2" type="radio" name="mileage">
-                                    2 miles
-                                  </label>
-                                </div>
-                                <div>
-                                  <label class="radio">
-                                    <input value="3" type="radio" name="mileage">
-                                    3 miles
-                                  </label>
-                                </div>
-                                <div>
-                                  <label class="radio">
-                                    <input value="5" type="radio" name="mileage">
-                                    5 miles
-                                  </label>
-                                </div><br>
-                              </div>
-                          
-                            <!--This is button should submit the above data-->
-                            <button id="submitAddresses" class="button is-primary">Submit</button>
+    </div>
+    <!--Modal End-->
+    <div id="input">
+        <div class="columns is-mobile">
+            <div class="column">
+                <div id="field-1">
+                    <div class="field">
+                        <label class="label">Address 1</label>
+                        <!--This is where the Address 1 value will be located-->
+                        <div id="autoOne" class="control has-icons-left has-icons-right">
+                            <input id="streetOne" class="input is-primary" type="text" placeholder="Street address">
                         </div>
                     </div>
                 </div>
+                <br>
+
+                <div>
+                    <div class="distance"><strong>Result Radius</strong></div>
+                    <div class="control">
+                        <div>
+                            <label class="radio">
+                                <input value="1" type="radio" name="mileage">
+                                1 mile
+                            </label>
+                        </div>
+                        <div>
+                            <label class="radio">
+                                <input value="2" type="radio" name="mileage">
+                                2 miles
+                            </label>
+                        </div>
+                        <div>
+                            <label class="radio">
+                                <input value="3" type="radio" name="mileage">
+                                3 miles
+                            </label>
+                        </div>
+                        <div>
+                            <label class="radio">
+                                <input value="5" type="radio" name="mileage">
+                                5 miles
+                            </label>
+                        </div><br>
+                    </div>
+                </div>
             </div>
-    </div>
-    </div>
-  
-    <div class="box">
-    
 
 
-      <div class="columns">
-        <div id="dropdown">
-        <div class="field">
-          <label class="label"></label>
-          <div class="control">
-            <div class="select">
-              <select id="priceFilter">
-                <option value="">Price ($)</option>
-                <option value="1">$</option>
-                <option value="2">$$</option>
-                <option value="3">$$$</option>
-                <option value="4">$$$$</option>
-              </select>
+
+            <div class="column">
+                <img src="./assets/Top-image.png">
+
+                <div class="field">
+                    <div class="control has-icons-left has-icons-right">
+                        <input id="userQuery" class="input is-primary" type="text"
+                            placeholder="Keyword search (i.e Sushi, coffee, etc)">
+                    </div>
+                </div>
+
+                <div id="sort">
+                    <div class="control">
+                        <div class="field has-addons">
+                            <div class="control is-expanded">
+                                <label class="label">Sort By</label>
+                                <div class="select is-fullwidth">
+                                    <select name="country">
+                                        <option></option>
+                                        <option id="cost">Cost</option>
+                                        <option id="distance">Distance</option>
+                                        <option id="popularity">Popularity</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div id="Button">
+                    <button id="submitAddresses" class="button is-success">Meet Up!</button>
+                </div>
             </div>
-          </div>
+
+            <!--This is the Address 2 field-->
+            <div class="column">
+                <div id="field-1">
+                    <div class="field">
+                        <label class="label">Address 2</label>
+                        <!--This is where the Address 2 value will be located-->
+                        <div id="autoTwo" class="control has-icons-left has-icons-right">
+                            <input id="streetTwo" class="input is-primary" type="text" placeholder="Street address">
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="field">
+                    <div class="price"><strong>Price Range</strong></div>
+                    <div class="control">
+                        <label class="radio">
+                            <input value="1" type="radio" name="priceRng">
+                            $
+                        </label>
+                        <div>
+                            <label class="radio">
+                                <input value="2" type="radio" name="priceRng">
+                                $$
+                            </label>
+                        </div>
+                        <div>
+                            <label class="radio">
+                                <input value="3" type="radio" name="priceRng">
+                                $$$
+                            </label>
+                        </div>
+                        <div>
+                            <label class="radio">
+                                <input value="4" type="radio" name="priceRng">
+                                $$$$
+                            </label>
+                        </div><br>
+                    </div>
+                </div>
+            </div>
         </div>
-      <div>
-          <button id="filterRest" class="button">Filter</button><br>
-      </div>
-      </div>
-  
-    
-        <!-- Restaurant list -->
-      <div class="column is-one-half restaurant-list">
-        
-      </div>
-        <!-- Map -->
-        <div class="column is-one-half">
-            <div id="myMap"></div>
-        </div>
-        </div>
-      </div>
+    </div>
+
+    <br>
+    <label class="radio">
+        <input value="asc" type="radio" name="sortOrd">
+        Ascend
+    </label>
+    </div>
+    <div>
+        <label class="radio">
+            <input value="desc" type="radio" name="sortOrd">
+            Descend
+        </label>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+
+
+    <!-- Restaurant list -->
+    <div class="column is-one-half restaurant-list">
+
+    </div>
+    <!-- Map -->
+    <div class="column is-one-half">
+        <div id="myMap"></div>
+    </div>
+    </div>
+    </div>
     </main>
     <section id="aboutPage">
 
     </section>
-      <script src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[ApFZwBlF5C4sFUrPWvHt7DxQbosvOYl24WTQE-GGMHphkpiCCHm14tkZq0S8CvJZ]' async defer></script>
-      <script src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
-      <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-      <script src="script.js"></script>
+    <script
+        src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[ApFZwBlF5C4sFUrPWvHt7DxQbosvOYl24WTQE-GGMHphkpiCCHm14tkZq0S8CvJZ]'
+        async defer></script>
+    <script src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="script.js"></script>
 
-  
 
-  </body>
-  
-  </html> 
+
+</body>
+
+</html>
