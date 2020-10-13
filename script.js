@@ -392,8 +392,8 @@ function test(x, y) {
                                     $(".modal-card-title").text(zomatoCall[indexCall].restaurant.name);
 
                                     var restIMG = $("<img class ='restaurantIMG' alt='Featured Image' style='width: 100%;'>");
-                                    if(result.restaurant.featured_image){
-                                        restIMG.attr("src", result.restaurant.featured_image);
+                                    if(zomatoCall[indexCall].restaurant.featured_image){
+                                        restIMG.attr("src", zomatoCall[indexCall].restaurant.featured_image);
                                     } else{
                                         //------------------------------------------------------------------------
                                         restIMG.attr("src", "assets/placeholder.jpg");
