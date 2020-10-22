@@ -1,5 +1,8 @@
 ## [Check Out The Deployed Site Here!](https://oxfordblucher.github.io/Restaurant-Roulette/)
 
+![Initial Page](/screenshots/initial_page.png "Initial Page")
+![Sample Results](/screenshots/sample_results.png "Sample Results")
+
 # UMEWE
 
 We all need simplicity in our lives. That’s where UMEWE comes in! Whether you’re looking to meet a friend, family member, or even a date, UMEWE will find the midway point between two different locations and display a list of 10 restaurants within that radius. You can even further define your search by typing in a specific parameter such as “sushi,” and even sort by cost, distance or popularity. 
